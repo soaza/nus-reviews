@@ -1,3 +1,4 @@
+import { ModuleCode } from "./../../utils/interfaces";
 import axios from "axios";
 import { IModuleInformation } from "../../utils/interfaces";
 
@@ -26,8 +27,19 @@ const axiosWrapper = ({ url, method }: IFetchWrapper) => {
   }
 };
 
+export const getModule: (
+  moduleCode: string
+) => Promise<IModuleInformation> = async (moduleCode) => {
+  const res = await axiosWrapper({
+    url: `2021-2022/modules/${moduleCode}.json`,
+    method: "GET",
+  });
+
+  return res;
+};
+
 export const getAllModules: () => Promise<{
-  companies: IModuleInformation[];
+  modules: IModuleInformation[];
 }> = async () => {
   const res = await axiosWrapper({
     url: "2021-2022/moduleList.json",

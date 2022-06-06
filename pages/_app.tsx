@@ -10,6 +10,10 @@ const queryClient = new QueryClient({});
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <link
+        href="https://fonts.googleapis.com/css?family=Muli"
+        rel="stylesheet"
+      />
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
