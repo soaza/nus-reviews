@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  font-family: "Muli";
-  /* font-family: "Cerebri Sans", sans-serif; */
+  /* font-family: "Muli"; */
+  font-family: "Cerebri Sans", sans-serif;
 }

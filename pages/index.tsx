@@ -5,8 +5,8 @@ const IndexPage = () => {
   const { isLoading, isError, data, error, refetch } = useQuery(
     "modules",
     async () => {
-      const data = await getAllModules();
-      console.log({ data });
+      // const data = await getAllModules();
+      // console.log({ data });
     }
   );
 
