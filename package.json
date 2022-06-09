@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.7",
+    "avataaars": "^2.0.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "next": "latest",

@@ -2,7 +2,9 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Divider } from "../../components/common/Divider";
+import { OverallRating } from "../../components/modulePage/OverallRating";
 import { Ratings } from "../../components/modulePage/Ratings";
+import { Review } from "../../components/modulePage/Review";
 import { SemesterData } from "../../utils/interfaces";
 import { getModule } from "../api/api";
 
@@ -11,7 +13,7 @@ const ModulePage = () => {
   const pageModuleCode = router.query.module_code as string;
 
   const { data: module } = useQuery(["module", pageModuleCode], async () => {
-    const data = await getModule(pageModuleCode.toUpperCase());
+    const data = await getModule(pageModuleCode?.toUpperCase());
     return data;
   });
 
@@ -28,7 +30,6 @@ const ModulePage = () => {
         3: "Special Term I",
         4: "Special Term II",
       };
-      const prefix = semesterNumber > 2 ? "Special Term" : "Semester";
       if (index == semesterData.length - 1) {
         return `${semesterMap[semesterNumber]}`;
       }
@@ -54,9 +55,10 @@ const ModulePage = () => {
           </div>
           <Divider />
 
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-5 flex gap-4 flex-col">
+          <div className="grid grid-cols-12 gap-4 divide-x-4">
+            <div className="col-span-4 flex gap-4 flex-col overflow-y-auto">
               <div>{module.description}</div>
+
               <div>
                 <div className="font-medium text-xl">Prerequisite</div>
                 <div>{module.prerequisite}</div>
@@ -65,9 +67,16 @@ const ModulePage = () => {
                 <div className="font-medium text-xl">Preclusion</div>
                 <div>{module.preclusion}</div>
               </div>
+
+              <OverallRating />
             </div>
-            <div className="col-span-6">
-              <Ratings />
+
+            <div className="col-span-8 p-8  h-screen overflow-y-auto">
+              <>
+                {[0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
+                  <Review />
+                ))}
+              </>
             </div>
           </div>
         </div>

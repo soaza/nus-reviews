@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import "../styles/index.css";
-import { Sidebar } from "../components/Sidebar";
+import { Layout } from "../components/Sidebar";
 
 const queryClient = new QueryClient({});
 
@@ -16,9 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         rel="stylesheet"
       />
       <QueryClientProvider client={queryClient}>
-        <Sidebar>
+        <Layout>
           <Component {...pageProps} />
-        </Sidebar>
+        </Layout>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
