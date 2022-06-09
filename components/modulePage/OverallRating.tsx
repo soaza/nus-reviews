@@ -6,6 +6,7 @@ export const OverallRating = () => {
     { ratingType: "Difficulty", rating: 5 },
     { ratingType: "Workload", rating: 3 },
     { ratingType: "Practicality", rating: 4 },
+    { ratingType: "Enjoyability", rating: 4 },
   ];
   return (
     <div>

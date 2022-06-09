@@ -1,5 +1,6 @@
 import Avatar from "avataaars";
 import React from "react";
+import { Divider } from "../common/Divider";
 import { RatingBar } from "./RatingBar";
 
 export const Review = () => {
@@ -7,9 +8,10 @@ export const Review = () => {
     { ratingType: "Difficulty", rating: 5 },
     { ratingType: "Workload", rating: 3 },
     { ratingType: "Practicality", rating: 4 },
+    { ratingType: "Enjoyability", rating: 4 },
   ];
   return (
-    <article>
+    <div className="mb-4">
       <div className="flex items-center mb-4 space-x-1">
         <Avatar className=" w-16 h-16" avatarStyle="Circle" />
 
@@ -52,7 +54,7 @@ export const Review = () => {
         Robots!
       </p>
 
-      <aside>
+      <div>
         <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
           19 people found this helpful
         </p>
@@ -64,7 +66,9 @@ export const Review = () => {
             Report
           </button>
         </div>
-      </aside>
-    </article>
+      </div>
+
+      <Divider />
+    </div>
   );
 };

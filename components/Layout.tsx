@@ -35,12 +35,14 @@ export const Layout = (props) => {
 
   return (
     <div>
-      <div className="grid grid-cols-12">
-        <div className="col-span-2 2xl:col-span-1 2xl:min-w-[10vw] overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-full">
+      <div className="grid lg:grid-cols-12">
+        <div className=" hidden lg:block 2xl:col-span-1 2xl:min-w-[10vw] overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-full">
           {SideBar}
         </div>
 
-        <div className="col-span-10 2xl:col-span-11 p-12">{children}</div>
+        <div className="col-span-10 2xl:col-span-11 p-4 lg:p-12">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Divider } from "../../components/common/Divider";
+import { FilterDropdown } from "../../components/modulePage/FilterDropdown";
 import { OverallRating } from "../../components/modulePage/OverallRating";
 import { Ratings } from "../../components/modulePage/Ratings";
 import { Review } from "../../components/modulePage/Review";
@@ -55,8 +56,8 @@ const ModulePage = () => {
           </div>
           <Divider />
 
-          <div className="grid grid-cols-12 gap-4 divide-x-4">
-            <div className="col-span-4 flex gap-4 flex-col overflow-y-auto">
+          <div className="grid lg:grid-cols-12 gap-4 lg:divide-x-4">
+            <div className="col-span-12 lg:col-span-4 flex gap-4 flex-col overflow-y-auto">
               <div>{module.description}</div>
 
               <div>
@@ -69,10 +70,26 @@ const ModulePage = () => {
               </div>
 
               <OverallRating />
+
+              <a
+                className="text-center bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-md text-sm font-medium  p-2"
+                target="_blank"
+                href={`https://nusmods.com/modules/${module.moduleCode}`}
+              >
+                Find out more on NUSMods
+              </a>
             </div>
 
-            <div className="col-span-8 p-8  h-screen overflow-y-auto">
+            <div className="col-span-12 lg:col-span-8 lg:p-8 lg:h-screen lg:overflow-y-auto">
               <>
+                <div className="flex justify-between">
+                  <div className="font-medium text-center text-2xl mb-4">
+                    376 Reviews
+                  </div>
+
+                  <FilterDropdown />
+                </div>
+
                 {[0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
                   <Review />
                 ))}

@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import "../styles/index.css";
-import { Layout } from "../components/Sidebar";
+import { Layout } from "../components/Layout";
 
 const queryClient = new QueryClient({});
 
