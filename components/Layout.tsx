@@ -1,9 +1,19 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { Navbar } from "./Navbar";
 
 export const Layout = (props) => {
   const { children } = props;
+  const { asPath } = useRouter();
+
+  if (asPath === "/new-user") {
+    return (
+      <div className="p-4 lg:px-16">
+        <div>{children}</div>
+      </div>
+    );
+  }
 
   return (
     <div>

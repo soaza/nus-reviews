@@ -28,7 +28,7 @@ const ModulePage = () => {
 
       <div>
         <div className="font-medium text-xl">Prerequisite</div>
-        <div>{module.prerequisite}</div>
+        <div>{module.prerequisite ? module.prerequisite : "-"}</div>
       </div>
       <div>
         <div className="font-medium text-xl">Preclusion</div>
@@ -68,7 +68,8 @@ const ModulePage = () => {
             {module.moduleCode}
           </div>
 
-          <div className="font-medium text-4xl mb-4">{module.title}</div>
+          <div className="font-medium text-4xl mb-2">{module.title}</div>
+          <div className="text-xl">{module.moduleCredit} MCs</div>
 
           <div className="text-xl">
             {parseModuleSemesterData(module.semesterData)}
