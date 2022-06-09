@@ -4,8 +4,8 @@ import { useQuery } from "react-query";
 import { Divider } from "../../components/common/Divider";
 import { FilterDropdown } from "../../components/modulePage/FilterDropdown";
 import { OverallRating } from "../../components/modulePage/OverallRating";
-import { Ratings } from "../../components/modulePage/Ratings";
 import { Review } from "../../components/modulePage/Review";
+import { parseModuleSemesterData } from "../../utils/common";
 import { SemesterData } from "../../utils/interfaces";
 import { getModule } from "../api/api";
 
@@ -22,24 +22,43 @@ const ModulePage = () => {
     return <div> Module not found.</div>;
   }
 
-  const parseModuleSemesterData = (semesterData: SemesterData[]) => {
-    const mappedSemesters = semesterData.map((semester, index) => {
-      const semesterNumber = semester.semester;
-      const semesterMap = {
-        1: "Semester 1",
-        2: "Semester 2",
-        3: "Special Term I",
-        4: "Special Term II",
-      };
-      if (index == semesterData.length - 1) {
-        return `${semesterMap[semesterNumber]}`;
-      }
+  const leftSection = (
+    <>
+      <div>{module.description}</div>
 
-      return `${semesterMap[semesterNumber]} | `;
-    });
+      <div>
+        <div className="font-medium text-xl">Prerequisite</div>
+        <div>{module.prerequisite}</div>
+      </div>
+      <div>
+        <div className="font-medium text-xl">Preclusion</div>
+        <div>{module.preclusion}</div>
+      </div>
 
-    return mappedSemesters.join("");
-  };
+      <OverallRating />
+
+      <a
+        className="text-center bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-md text-sm font-medium  p-2"
+        target="_blank"
+        href={`https://nusmods.com/modules/${module.moduleCode}`}
+      >
+        Find out more on NUSMods
+      </a>
+    </>
+  );
+  const rightSection = (
+    <>
+      <div className="flex justify-between">
+        <div className="font-medium text-center text-2xl mb-4">376 Reviews</div>
+
+        <FilterDropdown />
+      </div>
+
+      {[0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
+        <Review />
+      ))}
+    </>
+  );
 
   return (
     <>
@@ -56,44 +75,13 @@ const ModulePage = () => {
           </div>
           <Divider />
 
-          <div className="grid lg:grid-cols-12 gap-4 lg:divide-x-4">
-            <div className="col-span-12 lg:col-span-4 flex gap-4 flex-col overflow-y-auto">
-              <div>{module.description}</div>
-
-              <div>
-                <div className="font-medium text-xl">Prerequisite</div>
-                <div>{module.prerequisite}</div>
-              </div>
-              <div>
-                <div className="font-medium text-xl">Preclusion</div>
-                <div>{module.preclusion}</div>
-              </div>
-
-              <OverallRating />
-
-              <a
-                className="text-center bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-md text-sm font-medium  p-2"
-                target="_blank"
-                href={`https://nusmods.com/modules/${module.moduleCode}`}
-              >
-                Find out more on NUSMods
-              </a>
+          <div className="grid lg:grid-cols-12 gap-4 lg:divide-x-2">
+            <div className="col-span-12 lg:col-span-5 flex gap-4 flex-col overflow-y-auto">
+              {leftSection}
             </div>
 
-            <div className="col-span-12 lg:col-span-8 lg:p-8 lg:h-screen lg:overflow-y-auto">
-              <>
-                <div className="flex justify-between">
-                  <div className="font-medium text-center text-2xl mb-4">
-                    376 Reviews
-                  </div>
-
-                  <FilterDropdown />
-                </div>
-
-                {[0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
-                  <Review />
-                ))}
-              </>
+            <div className="col-span-12 lg:col-span-7 lg:p-8 lg:h-screen lg:overflow-y-auto">
+              {rightSection}
             </div>
           </div>
         </div>

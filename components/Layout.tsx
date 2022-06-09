@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React from "react";
+import { Navbar } from "./Navbar";
 
 export const Layout = (props) => {
   const { children } = props;
@@ -23,6 +25,15 @@ export const Layout = (props) => {
   const SideBar = (
     <ul className="space-y-2">
       <li>
+        <Link href={"/"}>
+          <a className="h-12 p-2 flex items-center rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <span className="ml-3 font-semibold text-2xl select-none whitespace-nowrap ">
+              NUSReviews
+            </span>
+          </a>
+        </Link>
+      </li>
+      <li>
         <a className="h-12 p-2 flex items-center rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
           {BookIcon}
           <span className="ml-3 font-normal select-none whitespace-nowrap ">
@@ -35,14 +46,10 @@ export const Layout = (props) => {
 
   return (
     <div>
-      <div className="grid lg:grid-cols-12">
-        <div className=" hidden lg:block 2xl:col-span-1 2xl:min-w-[10vw] overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-full">
-          {SideBar}
-        </div>
+      <div className="p-4 lg:px-16">
+        <Navbar />
 
-        <div className="col-span-10 2xl:col-span-11 p-4 lg:p-12">
-          {children}
-        </div>
+        <div>{children}</div>
       </div>
     </div>
   );
