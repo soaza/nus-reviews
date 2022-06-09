@@ -38,9 +38,7 @@ export const getModule: (moduleCode: string) => Promise<Module> = async (
   return res;
 };
 
-export const getAllModules: () => Promise<{
-  modules: Module[];
-}> = async () => {
+export const getAllModules: () => Promise<Module[]> = async () => {
   const res = await axiosWrapper({
     url: "2021-2022/moduleList.json",
     method: "GET",
