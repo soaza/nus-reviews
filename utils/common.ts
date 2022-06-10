@@ -1,5 +1,12 @@
 import { SemesterData } from "./interfaces";
 
+export const ratingTypes = [
+  "Difficulty",
+  "Workload",
+  "Practicality",
+  "Enjoyability",
+];
+
 export const parseModuleSemesterData = (semesterData: SemesterData[]) => {
   const mappedSemesters = semesterData.map((semester, index) => {
     const semesterNumber = semester.semester;

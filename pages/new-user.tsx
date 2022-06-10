@@ -11,7 +11,7 @@ const NewUser = () => {
         </p>
         <p className="text-xl lg:text-3xl font-light">
           To ensure a continuity of reviews, we require new users to submit a
-          review for a module they have take in the past.
+          review for a module they have taken in the past.
         </p>
       </div>
 
