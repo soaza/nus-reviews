@@ -31,17 +31,17 @@ understanding is requried to ace the module`,
 
 export const SubmitReviewPage = () => {
   return (
-    <div className="lg:grid grid-cols-12">
+    <div className="lg:grid grid-cols-12 gap-12">
       <div className="col-span-5 flex align-middle flex-col gap-4 ">
-        <div className="text-5xl font-semibold mb-4">Submitting a review</div>
+        <div className="text-5xl font-semibold">Submitting a review</div>
 
-        <p className="text-xl lg:text-2xl font-light">
+        <p className="text-md lg:text-lg font-light">
           Our reviews are based on 4 criterias:{" "}
         </p>
 
         {criterias.map((criteriaObj, index) => {
           return (
-            <p key={index} className="text-md lg:text-xl font-light">
+            <p key={index} className="text-md lg:text-lg font-light">
               <span className="font-bold ">{criteriaObj.criteria}:</span>{" "}
               {criteriaObj.description}
             </p>
@@ -51,7 +51,7 @@ export const SubmitReviewPage = () => {
         <Image height={500} src={SittingImage} />
       </div>
 
-      <div className="col-span-7 p-2 lg:12">
+      <div className="col-span-6 p-2 lg:12">
         <SubmitReviewForm />
       </div>
     </div>
