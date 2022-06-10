@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-import router from "next/router";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
@@ -7,7 +6,7 @@ import { ratingTypes } from "../../utils/common";
 import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/interfaces";
 
-export const NewUserModuleForm = () => {
+export const SubmitReviewForm = () => {
   const initialRatings = {
     Difficulty: 0,
     Workload: 0,
@@ -46,11 +45,10 @@ export const NewUserModuleForm = () => {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);
-        // }, 400);
-        router.push("/new-user/complete");
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
       }}
     >
       {({
@@ -71,7 +69,7 @@ export const NewUserModuleForm = () => {
             </label>
             <input
               autoComplete="off"
-              className=" appearance-none border rounded w-full lg:w-[50vw] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" appearance-none border rounded w-full lg:w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               onChange={(e) => setSearchKeyword(e.target.value)}
               value={searchKeyword}
