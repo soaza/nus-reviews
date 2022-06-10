@@ -39,9 +39,9 @@ export const SubmitReviewPage = () => {
           Our reviews are based on 4 criterias:{" "}
         </p>
 
-        {criterias.map((criteriaObj) => {
+        {criterias.map((criteriaObj, index) => {
           return (
-            <p className="text-md lg:text-xl font-light">
+            <p key={index} className="text-md lg:text-xl font-light">
               <span className="font-bold ">{criteriaObj.criteria}:</span>{" "}
               {criteriaObj.description}
             </p>

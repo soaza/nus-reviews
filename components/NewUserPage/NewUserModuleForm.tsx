@@ -91,9 +91,10 @@ export const NewUserModuleForm = () => {
             />
             {searchKeyword && modulesFiltered.length > 0 && (
               <ul className="absolute bg-white border border-gray-100 w-[70vw] lg:w-[50vw]">
-                {modulesFiltered.map((module) => {
+                {modulesFiltered.map((module, index) => {
                   return (
                     <li
+                      key={index}
                       onClick={() => {
                         setValues({
                           ...values,

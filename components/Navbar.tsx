@@ -9,15 +9,15 @@ export const Navbar = () => {
       <div className="flex justify-between items-center">
         <Link href="/">
           <span className="cursor-pointer self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
-            NUSReviews
+            NUSReviews.
           </span>
         </Link>
 
         <ul className="flex md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium ">
           {NavbarItems.map((item, index) => {
             return (
-              <Link href={"/submit-review"}>
-                <li key={index}>
+              <Link key={index} href={"/submit-review"}>
+                <li>
                   <a className="block bg-black text-white border-b border-gray-100 md:border-0 hover:bg-gray-700  rounded-md cursor-pointer text-base p-2">
                     {item}
                   </a>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { Navbar } from "./Navbar";
@@ -23,6 +22,17 @@ export const Layout = (props) => {
         <Navbar />
 
         <div>{children}</div>
+
+        {/* <div className=" bottom-0 left-0 fixed text-center w-full text-gray-400">
+          Photos from{" "}
+          <a
+            target="_blank"
+            href="https://opendoodles.com/"
+            className="underline"
+          >
+            https://opendoodles.com/
+          </a>
+        </div> */}
       </div>
     </div>
   );
