@@ -18,7 +18,9 @@ export const Searchbar = () => {
       const data = await getAllModules();
       setModulesFiltered(
         data
-          .filter((module) => module.moduleCode.includes(keyword.toUpperCase()))
+          .filter((module) =>
+            module.moduleCode.toUpperCase().includes(keyword.toUpperCase())
+          )
           .splice(0, 5)
       );
     }
@@ -26,14 +28,16 @@ export const Searchbar = () => {
 
   return (
     <div>
-      <input
-        autoComplete="off"
-        onChange={(e) => setKeyword(e.target.value)}
-        type="text"
-        name="name"
-        placeholder="Search modules..."
-        className="font-light relative w-[90vw] lg:w-[25vw] py-2 border-b-2 border-black outline-none focus:border-gray-400 text-xl"
-      />
+      <div className="flex-row flex">
+        <input
+          autoComplete="off"
+          onChange={(e) => setKeyword(e.target.value)}
+          type="text"
+          name="name"
+          placeholder="Search module code"
+          className="font-light relative w-[90vw] lg:w-[25vw] py-2 border-b-2 border-black outline-none focus:border-gray-400 text-xl"
+        />
+      </div>
 
       {keyword && modulesFiltered.length > 0 && (
         <ul className="absolute bg-white border border-gray-100 w-[90vw] lg:w-[25vw] mt-2">

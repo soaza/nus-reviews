@@ -11,7 +11,7 @@ export const OverallRatingScore = (props: {
       case score < 2:
         return "red";
       case score < 3.5:
-        return "blue";
+        return "orange";
       case score <= 5:
         return "green";
       default:
