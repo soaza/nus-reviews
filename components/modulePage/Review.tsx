@@ -1,6 +1,7 @@
 import Avatar from "avataaars";
 import React from "react";
 import { Divider } from "../common/Divider";
+import { OverallRatingScore } from "../common/OverallRatingScore";
 import { RatingBar } from "./RatingBar";
 
 export const Review = () => {
@@ -20,12 +21,7 @@ export const Review = () => {
         </div>
       </div>
       <div className="flex items-center mb-1">
-        <p className="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800">
-          4.0
-        </p>
-        <p className="ml-2 font-medium text-gray-900 dark:text-white">
-          Excellent
-        </p>
+        <OverallRatingScore score={4} />
       </div>
 
       <div className="">

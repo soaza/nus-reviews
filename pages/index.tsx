@@ -1,4 +1,3 @@
-import { useQuery } from "react-query";
 import LandingPageImage from "../assets/images/landing-page.svg";
 import Image from "next/image";
 import { Searchbar } from "../components/LandingPage/Searchbar";
@@ -7,7 +6,7 @@ const IndexPage = () => {
   return (
     <div className="lg:flex flex-row justify-center">
       <div className="w-full lg:w-1/2">
-        <Image src={LandingPageImage} alt="Picture of the author" />
+        <Image src={LandingPageImage} />
       </div>
 
       <div className="w-full lg:w-1/2 place-content-center flex flex-col align-middle gap-5">

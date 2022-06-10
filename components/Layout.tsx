@@ -7,7 +7,9 @@ export const Layout = (props) => {
   const { children } = props;
   const { asPath } = useRouter();
 
-  if (asPath === "/new-user") {
+  const standalonePaths = ["/new-user", "/new-user/complete"];
+
+  if (standalonePaths.includes(asPath)) {
     return (
       <div className="p-4 lg:px-16">
         <div>{children}</div>

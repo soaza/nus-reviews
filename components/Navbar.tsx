@@ -15,9 +15,9 @@ export const Navbar = () => {
 
         <div className="hidden md:block ">
           <ul className="flex mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium ">
-            {NavbarItems.map((item) => {
+            {NavbarItems.map((item, index) => {
               return (
-                <li>
+                <li key={index}>
                   <a className="block text-gray-700 border-b border-gray-100 md:border-0 hover:bg-gray-200  rounded-md cursor-pointer text-base p-2">
                     {item}
                   </a>

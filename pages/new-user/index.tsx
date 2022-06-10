@@ -1,5 +1,5 @@
 import React from "react";
-import { NewUserModuleForm } from "../components/NewUserPage/NewUserModuleForm";
+import { NewUserModuleForm } from "../../components/NewUserPage/NewUserModuleForm";
 
 const NewUser = () => {
   return (

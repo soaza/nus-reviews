@@ -39,7 +39,7 @@ export const NewUserModuleForm = () => {
       initialValues={{ ...initialRatings, module_code: "" }}
       validate={(values) => {
         const errors: any = {};
-        if (!values.module_code) {
+        if (!values.module_code || !searchKeyword) {
           errors.module_code = "Required";
         }
         return errors;
@@ -51,7 +51,14 @@ export const NewUserModuleForm = () => {
         }, 400);
       }}
     >
-      {({ values, errors, setValues, handleChange, handleSubmit }) => (
+      {({
+        values,
+        errors,
+        setValues,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+      }) => (
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded px-8 pt-6 pb-8"
@@ -70,7 +77,7 @@ export const NewUserModuleForm = () => {
               placeholder="Module"
             />
             {searchKeyword && modulesFiltered.length > 0 && (
-              <ul className="absolute bg-white border border-gray-100 w-[70vw] lg:w-[50vw] mt-2">
+              <ul className="absolute bg-white border border-gray-100 w-[70vw] lg:w-[50vw]">
                 {modulesFiltered.map((module) => {
                   return (
                     <li
@@ -97,8 +104,6 @@ export const NewUserModuleForm = () => {
               </div>
             )}
           </div>
-
-          {console.log(values)}
 
           {ratingTypes.map((ratingType, index) => {
             return (
@@ -129,7 +134,7 @@ export const NewUserModuleForm = () => {
               Review (optional)
             </label>
             <textarea
-              className="block w-full p-4  border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 "
+              className="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 h-[30vh] sm:text-md focus:ring-blue-500 focus:border-blue-500 "
               name="review"
               onChange={handleChange}
             />
@@ -139,6 +144,7 @@ export const NewUserModuleForm = () => {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
+              disabled={isSubmitting}
             >
               Submit
             </button>
