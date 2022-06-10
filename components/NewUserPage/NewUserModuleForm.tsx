@@ -6,6 +6,7 @@ import { getAllModules } from "../../pages/api/api";
 import { ratingTypes } from "../../utils/common";
 import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/interfaces";
+import { OverallRatingScore } from "../common/OverallRatingScore";
 
 export const NewUserModuleForm = () => {
   const initialRatings = {
@@ -34,6 +35,16 @@ export const NewUserModuleForm = () => {
       );
     }
   });
+
+  const calculateOverallScore = (values) => {
+    return (
+      parseFloat(
+        ratingTypes.reduce((x, y) => {
+          return x + values[y];
+        }, 0)
+      ) / 4
+    );
+  };
 
   return (
     <Formik
@@ -130,6 +141,14 @@ export const NewUserModuleForm = () => {
               </div>
             );
           })}
+
+          <div className="text-center text-gray-400">
+            Overall Score :{" "}
+            <OverallRatingScore
+              score={calculateOverallScore(values)}
+              hideText
+            />
+          </div>
 
           <div className="mb-6">
             <label className="block mb-2 text-sm font-bold dark:text-gray-300">

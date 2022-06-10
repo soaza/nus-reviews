@@ -1,10 +1,12 @@
 import { Formik } from "formik";
+import router from "next/router";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
 import { ratingTypes } from "../../utils/common";
 import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/interfaces";
+import { OverallRatingScore } from "../common/OverallRatingScore";
 
 export const SubmitReviewForm = () => {
   const initialRatings = {
@@ -34,6 +36,16 @@ export const SubmitReviewForm = () => {
     }
   });
 
+  const calculateOverallScore = (values) => {
+    return (
+      parseFloat(
+        ratingTypes.reduce((x, y) => {
+          return x + values[y];
+        }, 0)
+      ) / 4
+    );
+  };
+
   return (
     <Formik
       initialValues={{ ...initialRatings, module_code: "" }}
@@ -45,10 +57,11 @@ export const SubmitReviewForm = () => {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        // setTimeout(() => {
+        //   alert(JSON.stringify(values, null, 2));
+        //   setSubmitting(false);
+        // }, 400);
+        router.push("/submit-review/complete");
       }}
     >
       {({
@@ -98,6 +111,7 @@ export const SubmitReviewForm = () => {
                 })}
               </ul>
             )}
+
             {errors.module_code && (
               <div className="text-red-400 text-sm font-bold">
                 *{errors.module_code}
@@ -128,6 +142,14 @@ export const SubmitReviewForm = () => {
               </div>
             );
           })}
+
+          <div className="text-center text-gray-400">
+            Overall Score :{" "}
+            <OverallRatingScore
+              score={calculateOverallScore(values)}
+              hideText
+            />
+          </div>
 
           <div className="mb-6">
             <label className="block mb-2 text-sm font-bold dark:text-gray-300">

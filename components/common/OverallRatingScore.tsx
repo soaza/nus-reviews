@@ -1,7 +1,10 @@
 import React from "react";
 
-export const OverallRatingScore = (props: { score: number }) => {
-  const { score } = props;
+export const OverallRatingScore = (props: {
+  score: number;
+  hideText?: boolean;
+}) => {
+  const { score, hideText } = props;
 
   const scoreColor = () => {
     switch (true) {
@@ -9,7 +12,7 @@ export const OverallRatingScore = (props: { score: number }) => {
         return "red";
       case score < 3.5:
         return "blue";
-      case score < 5:
+      case score <= 5:
         return "green";
       default:
         return "white";
@@ -36,9 +39,12 @@ export const OverallRatingScore = (props: { score: number }) => {
       >
         {score.toFixed(1)}
       </p>
-      <p className="ml-2 font-medium text-gray-900 dark:text-white">
-        {scoreText()}
-      </p>
+
+      {!hideText && (
+        <p className="ml-2 font-medium text-gray-900 dark:text-white">
+          {scoreText()}
+        </p>
+      )}
     </>
   );
 };

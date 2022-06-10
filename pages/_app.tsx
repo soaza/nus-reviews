@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import "../styles/index.css";
 import { Layout } from "../components/Layout";
+import { useRouter } from "next/router";
 
 const queryClient = new QueryClient({});
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!localStorage.getItem("userUuid")) {
+      router.push("/new-user");
+    }
+  }, []);
+
   return (
     <>
       <link
@@ -23,6 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </QueryClientProvider>
     </>
   );
-}
+};
 
 export default MyApp;
