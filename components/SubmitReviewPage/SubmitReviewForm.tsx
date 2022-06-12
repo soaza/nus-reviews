@@ -1,11 +1,13 @@
 import { Formik } from "formik";
 import router from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
+import { UserContext } from "../../pages/_app";
 import { ratingTypes } from "../../utils/common";
 import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/interfaces";
+import { supabase } from "../../utils/supabase";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 
 export const SubmitReviewForm = () => {
@@ -20,6 +22,8 @@ export const SubmitReviewForm = () => {
   const [modulesFiltered, setModulesFiltered] = useState<IModuleInformation[]>(
     []
   );
+
+  const { userUuid } = useContext(UserContext);
 
   const debouncedSearch = useDebounce(searchKeyword, 0);
 
@@ -48,20 +52,27 @@ export const SubmitReviewForm = () => {
 
   return (
     <Formik
-      initialValues={{ ...initialRatings, module_code: "" }}
+      initialValues={{ ...initialRatings, review_module_code: "" }}
       validate={(values) => {
         const errors: any = {};
-        if (!values.module_code || !searchKeyword) {
+        if (!values.review_module_code || !searchKeyword) {
           errors.module_code = "Required";
         }
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);
-        // }, 400);
-        router.push("/submit-review/complete");
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+
+        const uploadFormData = async () => {
+          const { data, error } = await supabase
+            .from("Reviews")
+            .insert([{ review_user: userUuid, ...values }]);
+        };
+        uploadFormData();
+        // router.push("/submit-review/complete");
       }}
     >
       {({
@@ -83,9 +94,10 @@ export const SubmitReviewForm = () => {
               type="text"
               onChange={(e) => setSearchKeyword(e.target.value)}
               value={searchKeyword}
-              name="module_code"
+              name="review_module_code"
               placeholder="Module"
             />
+
             {searchKeyword && modulesFiltered.length > 0 && (
               <ul className="absolute bg-white border border-gray-100 w-[70vw] lg:w-[50vw]">
                 {modulesFiltered.map((module, index) => {
@@ -95,7 +107,7 @@ export const SubmitReviewForm = () => {
                       onClick={() => {
                         setValues({
                           ...values,
-                          module_code: module.moduleCode,
+                          review_module_code: module.moduleCode,
                         });
                         setSearchKeyword(
                           `${module.moduleCode}: ${module.title}`
@@ -110,9 +122,9 @@ export const SubmitReviewForm = () => {
               </ul>
             )}
 
-            {errors.module_code && (
+            {errors.review_module_code && (
               <div className="text-red-400 text-sm font-bold">
-                *{errors.module_code}
+                *{errors.review_module_code}
               </div>
             )}
           </div>
@@ -155,7 +167,7 @@ export const SubmitReviewForm = () => {
             </label>
             <textarea
               className="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 h-[30vh] sm:text-md focus:ring-blue-500 focus:border-blue-500 "
-              name="review"
+              name="review_description"
               onChange={handleChange}
             />
           </div>

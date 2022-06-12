@@ -2,6 +2,7 @@ import React from "react";
 import { SubmitReviewForm } from "../../components/SubmitReviewPage/SubmitReviewForm";
 import SittingImage from "../../assets/images/sitting-reading.svg";
 import Image from "next/image";
+import { NextPage } from "next";
 
 const criterias = [
   {
@@ -29,7 +30,7 @@ understanding is requried to ace the module`,
   },
 ];
 
-export const SubmitReviewPage = () => {
+export const SubmitReviewPage: NextPage = () => {
   return (
     <div className="lg:grid grid-cols-12 gap-12">
       <div className="col-span-5 flex align-middle flex-col gap-4 ">

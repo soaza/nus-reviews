@@ -1,6 +1,6 @@
 import { BigHead } from "@bigheads/core";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../pages/_app";
+import { supabase } from "../utils/supabase";
 
 export const Avatar = (props: { avatarOption: any }) => {
   const { avatarOption } = props;
