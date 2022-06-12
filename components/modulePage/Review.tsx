@@ -1,5 +1,6 @@
-import Avatar from "avataaars";
+import { BigHead } from "@bigheads/core";
 import React from "react";
+import { getRandomAvatarOptions } from "../../utils/bighead-randomise";
 import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 import { RatingBar } from "./RatingBar";
@@ -14,8 +15,9 @@ export const Review = () => {
   return (
     <div className="mb-4">
       <div className="flex items-center mb-4 space-x-1">
-        <Avatar className=" w-16 h-16" avatarStyle="Circle" />
-
+        <div className=" w-20">
+          <BigHead {...(getRandomAvatarOptions() as any)} />
+        </div>
         <div className="space-y-1 font-medium dark:text-white">
           <p>Jese Leos </p>
         </div>

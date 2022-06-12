@@ -7,22 +7,24 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@bigheads/core": "^0.3.3",
     "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
+    "@supabase/supabase-js": "^1.35.3",
     "autoprefixer": "^10.4.7",
-    "avataaars": "^2.0.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "formik": "^2.2.9",
     "next": "latest",
     "postcss": "^8.4.14",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-query": "^3.39.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.39.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",
-    "@types/react": "^16.13.0",
+    "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "postcss-preset-env": "^7.7.0",
     "tailwindcss": "^3.0.24",
