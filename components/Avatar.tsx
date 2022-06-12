@@ -1,5 +1,7 @@
 import { BigHead } from "@bigheads/core";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { UserContext } from "../utils/context";
 import { supabase } from "../utils/supabase";
 
 export const Avatar = (props: { avatarOption: any }) => {
@@ -8,21 +10,20 @@ export const Avatar = (props: { avatarOption: any }) => {
 };
 
 export const SelfAvatar = () => {
-  const [avatarOption, setAvatarOption] = useState();
+  const { user } = useContext(UserContext);
+  console.log({ user });
+  const { data: avatarOption } = useQuery(["user_avatar", user], async () => {
+    const { data, error } = await supabase
+      .from("Users")
+      .select("user_avatar")
+      .eq("user_uuid", user.user_uuid);
 
-  useEffect(() => {
-    const userUuid = localStorage.getItem("userUuid");
-    const fetchAvatarSettings = async () => {
-      const { data, error } = await supabase
-        .from("Users")
-        .select("user_avatar")
-        .eq("user_uuid", userUuid);
+    if (error) {
+      return;
+    }
 
-      setAvatarOption(data[0].user_avatar);
-    };
-
-    fetchAvatarSettings();
-  }, []);
+    return data[0].user_avatar;
+  });
 
   if (avatarOption) {
     return <BigHead {...(avatarOption as any)} />;

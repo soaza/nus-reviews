@@ -6,7 +6,7 @@ import { getAllModules } from "../../pages/api/api";
 import { ratingTypes } from "../../utils/common";
 import { UserContext } from "../../utils/context";
 import useDebounce from "../../utils/hooks";
-import { IModuleInformation } from "../../utils/interfaces";
+import { IModuleInformation } from "../../utils/nus_module_interfaces";
 import { supabase } from "../../utils/supabase";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 
@@ -23,7 +23,7 @@ export const NewUserModuleForm = () => {
     []
   );
 
-  const { userUuid } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const debouncedSearch = useDebounce(searchKeyword, 0);
 
@@ -68,7 +68,7 @@ export const NewUserModuleForm = () => {
         const uploadFormData = async () => {
           const { data, error } = await supabase
             .from("Reviews")
-            .insert([{ review_user: userUuid, ...values }]);
+            .insert([{ review_user: user.user_uuid, ...values }]);
         };
         uploadFormData();
         // router.push("/new-user/complete");

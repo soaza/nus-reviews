@@ -4,7 +4,7 @@ import {
   colors,
   animals,
 } from "unique-names-generator";
-import { SemesterData } from "./interfaces";
+import { SemesterData } from "./nus_module_interfaces";
 
 export const ratingTypes = [
   "Difficulty",

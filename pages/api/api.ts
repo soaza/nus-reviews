@@ -1,6 +1,5 @@
-import { Module } from "./../../utils/interfaces";
+import { Module } from "../../utils/nus_module_interfaces";
 import axios from "axios";
-import { IModuleInformation } from "../../utils/interfaces";
 
 const BASE_URL = process.env.NEXT_PUBLIC_NUS_MODS_API;
 interface IFetchWrapper {

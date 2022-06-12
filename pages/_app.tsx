@@ -10,6 +10,7 @@ import { generateUniqueUserName } from "../utils/common";
 import { UserContext } from "../utils/context";
 
 import "../styles/index.css";
+import { IUser } from "../utils/interface";
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -21,16 +22,17 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const initUser = () => {
     const userUuid = uuidv4();
     localStorage.setItem("userUuid", userUuid);
-    setUserUuid(userUuid);
+    // setUserUuid(userUuid);
     const avatarOptions = getRandomAvatarOptions();
     const insertUser = async () => {
-      await supabase.from("Users").insert([
+      const data = await supabase.from("Users").insert([
         {
           user_uuid: userUuid,
           user_avatar: avatarOptions,
           user_name: generateUniqueUserName(),
         },
       ]);
+      setUser(data[0]);
     };
     insertUser();
   };
@@ -42,13 +44,19 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       // router.push("new-user");
     } else {
       const userUuid = localStorage.getItem("userUuid");
-      setUserUuid(userUuid);
+      const fetchUser = async () => {
+        const { data } = await supabase
+          .from("Users")
+          .select()
+          .eq("user_uuid", userUuid);
+        setUser(data[0]);
+      };
+      fetchUser();
     }
   }, []);
 
-  const [userUuid, setUserUuid] = useState("");
-
-  const contextValue = useMemo(() => ({ userUuid, setUserUuid }), [userUuid]);
+  const [user, setUser] = useState<IUser>();
+  console.log(user);
 
   return (
     <>
@@ -57,7 +65,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         rel="stylesheet"
       />
       <QueryClientProvider client={queryClient}>
-        <UserContext.Provider value={contextValue}>
+        <UserContext.Provider value={{ user, setUser }}>
           <Layout>
             <Component {...pageProps} />
           </Layout>

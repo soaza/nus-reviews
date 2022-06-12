@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
 import useDebounce from "../../utils/hooks";
-import { IModuleInformation } from "../../utils/interfaces";
+import { IModuleInformation } from "../../utils/nus_module_interfaces";
 
 export const Searchbar = () => {
   const [keyword, setKeyword] = useState("");

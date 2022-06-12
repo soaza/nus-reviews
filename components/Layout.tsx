@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { SelfAvatar } from "./Avatar";
-import { Tooltip } from "./common/Tooltip";
 import { Navbar } from "./Navbar";
 
 export const Layout = (props) => {
@@ -20,9 +20,12 @@ export const Layout = (props) => {
 
   return (
     <div>
-      <div className="fixed bottom-0 right-0 w-16">
-        <SelfAvatar />
-      </div>
+      <Link href={"/user"}>
+        <div className="cursor-pointer fixed bottom-0 right-0 w-16">
+          <SelfAvatar />
+        </div>
+      </Link>
+
       <div className="p-4 lg:px-16">
         <Navbar />
 
