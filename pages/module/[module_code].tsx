@@ -49,7 +49,7 @@ const ModulePage = () => {
   const rightSection = (
     <>
       <div className="flex justify-between">
-        <div className="font-medium text-center text-2xl mb-4">376 Reviews</div>
+        <div className="font-light text-center text-2xl mb-4">376 Reviews</div>
 
         <FilterDropdown />
       </div>

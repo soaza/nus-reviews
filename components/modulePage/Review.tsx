@@ -1,6 +1,4 @@
-import { BigHead } from "@bigheads/core";
-import React, { useEffect } from "react";
-import { getRandomAvatarOptions } from "../../utils/bighead-randomise";
+import React from "react";
 import { SelfAvatar } from "../Avatar";
 import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
@@ -67,6 +65,11 @@ export const Review = () => {
           </button>
         </div>
       </div>
+
+      {/* <div className="mt-4 text-center font-light text-gray-400">
+        {" "}
+        This comment was originally posted on NUSMods
+      </div> */}
 
       <Divider />
     </div>

@@ -2,19 +2,18 @@ import React, { createContext, useEffect, useMemo, useState } from "react";
 import { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-
 import { Layout } from "../components/Layout";
 import { useRouter } from "next/router";
 import { getRandomAvatarOptions } from "../utils/bighead-randomise";
+import { supabase } from "../utils/supabase";
+import { generateUniqueUserName } from "../utils/common";
+import { UserContext } from "../utils/context";
 
 import "../styles/index.css";
-import { supabase } from "../utils/supabase";
 
 const { v4: uuidv4 } = require("uuid");
 
 const queryClient = new QueryClient({});
-
-export const UserContext = createContext(null);
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -25,9 +24,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     setUserUuid(userUuid);
     const avatarOptions = getRandomAvatarOptions();
     const insertUser = async () => {
-      await supabase
-        .from("Users")
-        .insert([{ user_uuid: userUuid, user_avatar: avatarOptions }]);
+      await supabase.from("Users").insert([
+        {
+          user_uuid: userUuid,
+          user_avatar: avatarOptions,
+          user_name: generateUniqueUserName(),
+        },
+      ]);
     };
     insertUser();
   };

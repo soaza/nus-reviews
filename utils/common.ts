@@ -1,3 +1,9 @@
+import {
+  uniqueNamesGenerator,
+  adjectives,
+  colors,
+  animals,
+} from "unique-names-generator";
 import { SemesterData } from "./interfaces";
 
 export const ratingTypes = [
@@ -24,4 +30,12 @@ export const parseModuleSemesterData = (semesterData: SemesterData[]) => {
   });
 
   return mappedSemesters.join("");
+};
+
+export const generateUniqueUserName = () => {
+  const randomName = uniqueNamesGenerator({
+    dictionaries: [adjectives, colors, animals],
+  });
+
+  return "anonymous_" + randomName;
 };
