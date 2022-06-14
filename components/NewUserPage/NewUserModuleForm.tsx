@@ -3,7 +3,7 @@ import router from "next/router";
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
-import { ratingTypes } from "../../utils/common";
+import { calculateOverallScore, ratingTypes } from "../../utils/common";
 import { UserContext } from "../../utils/context";
 import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/nus_module_interfaces";
@@ -39,16 +39,6 @@ export const NewUserModuleForm = () => {
       );
     }
   });
-
-  const calculateOverallScore = (values) => {
-    return (
-      parseFloat(
-        ratingTypes.reduce((x, y) => {
-          return x + values[y];
-        }, 0)
-      ) / 4
-    );
-  };
 
   return (
     <Formik

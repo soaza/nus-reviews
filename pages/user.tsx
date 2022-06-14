@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { SelfAvatar } from "../components/Avatar";
 import { UserContext } from "../utils/context";
 import moment from "moment";
+import { parseDate } from "../utils/common";
 
 export const UserPage = () => {
   const { user } = useContext(UserContext);
@@ -21,7 +22,7 @@ export const UserPage = () => {
           {user.user_name}
         </div>
         <div className="text-xl lg:text-2xl font-light ">
-          Joined: {moment(user.created_at).format("DD-MM-YYYY, hh:mm A")}
+          Joined: {parseDate(user.created_at)}
         </div>
       </div>
     </div>

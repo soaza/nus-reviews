@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -11,6 +11,7 @@ import { UserContext } from "../utils/context";
 
 import "../styles/index.css";
 import { IUser } from "../utils/interface";
+import Head from "next/head";
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -56,7 +57,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   const [user, setUser] = useState<IUser>();
-  console.log(user);
 
   return (
     <>
@@ -64,6 +64,28 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         href="https://fonts.googleapis.com/css?family=Muli"
         rel="stylesheet"
       />
+      <Head>
+        <title> {"NUSReviews"}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/images/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/images/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/images/favicon-16x16.png"
+        />
+      </Head>
       <QueryClientProvider client={queryClient}>
         <UserContext.Provider value={{ user, setUser }}>
           <Layout>

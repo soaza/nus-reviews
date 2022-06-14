@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   uniqueNamesGenerator,
   adjectives,
@@ -38,4 +39,18 @@ export const generateUniqueUserName = () => {
   });
 
   return "anonymous_" + randomName;
+};
+
+export const calculateOverallScore = (values) => {
+  return (
+    parseFloat(
+      ratingTypes.reduce((x, y) => {
+        return x + values[y];
+      }, 0)
+    ) / 4
+  );
+};
+
+export const parseDate = (date: Date) => {
+  return moment(date).format("DD-MM-YYYY, hh:mm A");
 };

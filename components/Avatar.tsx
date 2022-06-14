@@ -11,18 +11,19 @@ export const Avatar = (props: { avatarOption: any }) => {
 
 export const SelfAvatar = () => {
   const { user } = useContext(UserContext);
-  console.log({ user });
   const { data: avatarOption } = useQuery(["user_avatar", user], async () => {
-    const { data, error } = await supabase
-      .from("Users")
-      .select("user_avatar")
-      .eq("user_uuid", user.user_uuid);
+    if (user) {
+      const { data, error } = await supabase
+        .from("Users")
+        .select("user_avatar")
+        .eq("user_uuid", user.user_uuid);
 
-    if (error) {
-      return;
+      if (error) {
+        return;
+      }
+
+      return data[0].user_avatar;
     }
-
-    return data[0].user_avatar;
   });
 
   if (avatarOption) {
