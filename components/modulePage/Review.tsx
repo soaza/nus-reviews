@@ -4,7 +4,7 @@ import {
   parseDate,
   ratingTypes,
 } from "../../utils/common";
-import { IReview, IReviewByUser } from "../../utils/interface";
+import { IReviewByUser } from "../../utils/interface";
 import { Avatar } from "../Avatar";
 import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
@@ -12,13 +12,6 @@ import { RatingBar } from "./RatingBar";
 
 export const Review = (props: { review: IReviewByUser }) => {
   const { review } = props;
-
-  const ratings = [
-    { ratingType: "Difficulty", rating: 5 },
-    { ratingType: "Workload", rating: 3 },
-    { ratingType: "Practicality", rating: 4 },
-    { ratingType: "Enjoyability", rating: 4 },
-  ];
 
   const { user_name, user_avatar } = review.Users;
 

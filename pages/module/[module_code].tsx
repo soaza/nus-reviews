@@ -51,13 +51,7 @@ const ModulePage = () => {
   );
   const rightSection = (
     <>
-      <div className="flex justify-between">
-        <div className="font-light text-center text-2xl mb-4">376 Reviews</div>
-
-        <FilterDropdown />
-      </div>
-
-      <Reviews />
+      <Reviews moduleCode={module.moduleCode} />
       {/* {[0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, index) => (
         <Review key={index} />
       ))} */}
