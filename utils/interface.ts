@@ -1,12 +1,12 @@
 export interface IUser {
-  created_at: Date;
+  user_created_at: Date;
   user_avatar: any;
   user_uuid: string;
   user_name: string;
 }
 
 export interface IReview {
-  created_at: Date;
+  review_created_at: Date;
   Difficulty: number;
   Enjoyability: number;
   Practicality: number;

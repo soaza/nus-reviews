@@ -22,7 +22,7 @@ export const UserPage = () => {
           {user.user_name}
         </div>
         <div className="text-xl lg:text-2xl font-light ">
-          Joined: {parseDate(user.created_at)}
+          Joined: {parseDate(user.user_created_at)}
         </div>
       </div>
     </div>

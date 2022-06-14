@@ -43,7 +43,7 @@ export const Review = (props: { review: IReviewByUser }) => {
       </div>
 
       <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400">
-        <p>Reviewed on {parseDate(review.created_at)}</p>
+        <p>Reviewed on {parseDate(review.review_created_at)}</p>
       </footer>
 
       <p className="mb-2 font-light text-gray-500 dark:text-gray-400">

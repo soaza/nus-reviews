@@ -6,10 +6,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const FilterDropdown = () => {
-  const sortingOptions = ["Best", "Recent", "Old"];
+interface IProps {
+  sortOption: "Most Helpful" | "Recent" | "Oldest";
 
-  const [sortOption, setSortOption] = useState("");
+  setSortOption: (sortOption: "Most Helpful" | "Recent" | "Oldest") => void;
+}
+
+export const FilterDropdown = (props: IProps) => {
+  const { sortOption, setSortOption } = props;
+  const sortingOptions = ["Most Helpful", "Recent", "Oldest"];
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -37,7 +42,9 @@ export const FilterDropdown = () => {
                   {({ active }) => (
                     <a
                       onClick={() => {
-                        setSortOption(option);
+                        setSortOption(
+                          option as "Most Helpful" | "Recent" | "Oldest"
+                        );
                       }}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
