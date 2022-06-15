@@ -7,7 +7,7 @@ import { Reviews } from "../../components/ModulePage/Reviews";
 import { parseModuleSemesterData } from "../../utils/common";
 import { getModule } from "../api/api";
 
-const ModulePage = () => {
+const ModuleCodePage = () => {
   const router = useRouter();
   const pageModuleCode = router.query.module_code as string;
 
@@ -87,4 +87,4 @@ const ModulePage = () => {
   );
 };
 
-export default ModulePage;
+export default ModuleCodePage;
