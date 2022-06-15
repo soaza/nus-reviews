@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
 import { Divider } from "../../components/common/Divider";
-import { OverallRating } from "../../components/ModulePage/OverallRating";
-import { Reviews } from "../../components/ModulePage/Reviews";
+import { OverallRating } from "../../components/ModuleCodePage/OverallRating";
+import { Reviews } from "../../components/ModuleCodePage/Reviews";
 import { parseModuleSemesterData } from "../../utils/common";
 import { getModule } from "../api/api";
 
