@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { IReviewByUser } from "../../utils/interface";
 import { supabase } from "../../utils/supabase";
@@ -20,7 +20,7 @@ export const Reviews = (props: { moduleCode: string }) => {
   };
 
   const { data: reviews, isLoading } = useQuery<IReviewByUser[]>(
-    ["reviews", sortOption],
+    ["reviews", sortOption, moduleCode],
     async () => {
       const { data } = await supabase
         .from("Reviews")
@@ -51,7 +51,7 @@ export const Reviews = (props: { moduleCode: string }) => {
       )}
 
       {reviews?.map((review, index) => {
-        return <Review key={index} review={review} />;
+        return <Review key={moduleCode + index} review={review} />;
       })}
     </>
   );
