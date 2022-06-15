@@ -2,12 +2,9 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
 import { Divider } from "../../components/common/Divider";
-import { FilterDropdown } from "../../components/ModulePage/FilterDropdown";
 import { OverallRating } from "../../components/ModulePage/OverallRating";
-import { Review } from "../../components/ModulePage/Review";
 import { Reviews } from "../../components/ModulePage/Reviews";
 import { parseModuleSemesterData } from "../../utils/common";
-import { SemesterData } from "../../utils/nus_module_interfaces";
 import { getModule } from "../api/api";
 
 const ModulePage = () => {
