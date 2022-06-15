@@ -40,6 +40,7 @@ const ModulePage = () => {
       <a
         className="text-center bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-md text-sm font-medium  p-2"
         target="_blank"
+        rel="noreferrer"
         href={`https://nusmods.com/modules/${module.moduleCode}`}
       >
         Find out more on NUSMods

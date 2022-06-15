@@ -41,9 +41,9 @@ export const Searchbar = () => {
 
       {keyword && modulesFiltered.length > 0 && (
         <ul className="absolute bg-white border border-gray-100 w-[90vw] lg:w-[25vw] mt-2">
-          {modulesFiltered.map((module) => {
+          {modulesFiltered.map((module, index) => {
             return (
-              <Link href={`/module/${module.moduleCode}`}>
+              <Link key={index} href={`/module/${module.moduleCode}`}>
                 <li className="pl-4 pr-2 py-1  border-gray-100 relative cursor-pointer hover:bg-blue-200 hover:text-gray-900">
                   {`${module.moduleCode}: ${module.title}`}
                 </li>
