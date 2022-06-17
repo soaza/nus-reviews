@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { userInfo } from "os";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { UserContext } from "../../utils/context";
 import { IReviewByUser } from "../../utils/interface";
 import { supabase } from "../../utils/supabase";
 import { Spinner } from "../common/Spinner";
@@ -8,6 +10,8 @@ import { Review } from "./Review";
 
 export const Reviews = (props: { moduleCode: string }) => {
   const { moduleCode } = props;
+
+  const { user: currentUser } = useContext(UserContext);
 
   const [sortOption, setSortOption] = useState<
     "Most Helpful" | "Recent" | "Oldest"
@@ -19,10 +23,14 @@ export const Reviews = (props: { moduleCode: string }) => {
     Oldest: { col: "review_created_at", ascending: true },
   };
 
-  const { data: reviews, isLoading } = useQuery<IReviewByUser[]>(
-    ["reviews", sortOption, moduleCode],
+  const {
+    data: reviews,
+    isLoading,
+    refetch,
+  } = useQuery<IReviewByUser[]>(
+    ["reviews", sortOption, moduleCode, currentUser],
     async () => {
-      const { data, error } = await supabase
+      let { data: reviewData } = await supabase
         .from("Reviews")
         .select(`*,Users!Reviews_review_user_fkey!inner(*)`)
         .eq(`review_module_code`, `${moduleCode}`)
@@ -30,11 +38,24 @@ export const Reviews = (props: { moduleCode: string }) => {
           ascending: sortMapping[sortOption].ascending,
         });
 
-      if (error) {
-        console.log(error);
+      if (currentUser) {
+        const { data: helpfulVotesData } = await supabase
+          .from("HelpfulVotes")
+          .select(`review_id`)
+          .eq(`user_id`, `${currentUser.user_id}`);
+
+        const reviewsVoted = helpfulVotesData.map((data) => data.review_id);
+        reviewData = reviewData.map((review) => {
+          if (reviewsVoted.includes(review.review_id)) {
+            review.votedHelpfulByUser = true;
+          } else {
+            review.votedHelpfulByUser = false;
+          }
+          return review;
+        });
       }
 
-      return data as any;
+      return reviewData as any;
     }
   );
 
@@ -55,7 +76,13 @@ export const Reviews = (props: { moduleCode: string }) => {
       )}
 
       {reviews?.map((review, index) => {
-        return <Review key={moduleCode + index} review={review} />;
+        return (
+          <Review
+            refetchReviews={refetch}
+            key={moduleCode + index}
+            review={review}
+          />
+        );
       })}
     </>
   );

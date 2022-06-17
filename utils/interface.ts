@@ -7,17 +7,18 @@ export interface IUser {
 }
 
 export interface IReview {
+  review_id: number;
   review_created_at: Date;
   Difficulty: number;
   Enjoyability: number;
   Practicality: number;
   Workload: number;
   review_description: String;
-  review_helpful_count: number;
   review_module_code: String;
   review_user: String;
 }
 
 export interface IReviewByUser extends IReview {
   Users: IUser;
+  votedHelpfulByUser: boolean;
 }

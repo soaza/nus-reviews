@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useQuery } from "react-query";
 import {
   calculateOverallScore,
   parseDate,
@@ -12,17 +13,46 @@ import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 import { RatingBar } from "./RatingBar";
 
-export const Review = (props: { review: IReviewByUser }) => {
-  const { review } = props;
-  console.log(review);
+export const Review = (props: {
+  review: IReviewByUser;
+  refetchReviews: () => void;
+}) => {
+  const { review, refetchReviews } = props;
 
-  // const { user } = useContext(UserContext);
+  const { user: currentUser } = useContext(UserContext);
 
   const { user_name, user_avatar } = review.Users;
 
   const voteHelpful = async () => {
-    return;
+    await supabase
+      .from("HelpfulVotes")
+      .insert([{ review_id: review.review_id, user_id: currentUser.user_id }]);
+    refetchReviews();
   };
+
+  const unvoteHelpful = async () => {
+    await supabase
+      .from("HelpfulVotes")
+      .delete()
+      .match({ review_id: review.review_id, user_id: currentUser.user_id });
+    refetchReviews();
+  };
+
+  const { data: helpfulCount } = useQuery<IReviewByUser[]>(
+    ["review_helpful_count", review],
+    async () => {
+      const { data, error } = await supabase
+        .from("HelpfulVotes")
+        .select("*", { count: "exact" })
+        .eq("review_id", review.review_id);
+
+      if (error) {
+        console.log(error);
+      }
+
+      return data.length as any;
+    }
+  );
 
   return (
     <div className="mb-4">
@@ -61,12 +91,16 @@ export const Review = (props: { review: IReviewByUser }) => {
 
       <div>
         <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-          {review.review_helpful_count} people found this helpful
+          {helpfulCount} people found this helpful
         </p>
         <div className="flex items-center mt-3 ">
           <button
-            onClick={voteHelpful}
-            className="bg-green-100 hover:bg-green-200 text-green-700 rounded-md text-sm font-medium  p-2"
+            onClick={review.votedHelpfulByUser ? unvoteHelpful : voteHelpful}
+            className={`${
+              review.votedHelpfulByUser
+                ? `bg-green-700 text-green-100 `
+                : `bg-green-100 text-green-700 hover:bg-green-200`
+            } rounded-md text-sm font-medium  p-2`}
           >
             Helpful
           </button>
