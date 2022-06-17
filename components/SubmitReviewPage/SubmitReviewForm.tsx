@@ -9,6 +9,7 @@ import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/nus_module_interfaces";
 import { supabase } from "../../utils/supabase";
 import { OverallRatingScore } from "../common/OverallRatingScore";
+import { popNotification } from "../common/ToastNotif";
 
 export const SubmitReviewForm = () => {
   const initialRatings = {
@@ -46,23 +47,25 @@ export const SubmitReviewForm = () => {
       validate={(values) => {
         const errors: any = {};
         if (!values.review_module_code || !searchKeyword) {
-          errors.module_code = "Required";
+          errors.review_module_code = "Required";
         }
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        // setTimeout(() => {
+        //   alert(JSON.stringify(values, null, 2));
+        //   setSubmitting(false);
+        // }, 400);
 
         const uploadFormData = async () => {
-          const { data, error } = await supabase
+          await supabase
             .from("Reviews")
             .insert([{ review_user: user.user_uuid, ...values }]);
+          popNotification("Review submitted!");
         };
+
         uploadFormData();
-        // router.push("/submit-review/complete");
+        router.push("/submit-review/complete");
       }}
     >
       {({

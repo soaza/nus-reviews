@@ -10,9 +10,9 @@ import { supabase } from "../../utils/supabase";
 import { Avatar } from "../Avatar";
 import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
+import { popNotification } from "../common/ToastNotif";
 import { RatingBar } from "./RatingBar";
 import { ReportReviewModal } from "./ReportReviewModal";
-import { toast } from "react-toastify";
 
 export const Review = (props: {
   review: IReviewByUser;
@@ -44,14 +44,8 @@ export const Review = (props: {
     await supabase
       .from("ReportedReviews")
       .insert([{ review_id: review.review_id, user_id: currentUser.user_id }]);
+    popNotification("Review reported!");
 
-    toast.success("Reported Review", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      progress: undefined,
-    });
     refetchReviews();
   };
 
@@ -86,9 +80,11 @@ export const Review = (props: {
         <p>Reviewed on {parseDate(review.review_created_at)}</p>
       </footer>
 
-      <p className="mb-2 font-light text-gray-500 dark:text-gray-400">
-        {review.review_description}
-      </p>
+      {review.review_description && (
+        <p className="mb-2 font-light text-gray-500 dark:text-gray-400 border-gray-300 border-2 rounded-lg p-4">
+          {review.review_description}
+        </p>
+      )}
 
       <div>
         <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
