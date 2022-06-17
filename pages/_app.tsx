@@ -28,14 +28,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     // setUserUuid(userUuid);
     const avatarOptions = getRandomAvatarOptions();
     const insertUser = async () => {
-      const data = await supabase.from("Users").insert([
+      await supabase.from("Users").insert([
         {
           user_uuid: userUuid,
           user_avatar: avatarOptions,
           user_name: generateUniqueUserName(),
         },
       ]);
-      setUser(data[0]);
+      const { data: userData } = await supabase
+        .from("Users")
+        .select("*")
+        .eq("user_uuid", userUuid);
+      setUser(userData[0]);
     };
     insertUser();
   };
