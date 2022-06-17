@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
@@ -17,17 +17,26 @@ import { OverallRatingScore } from "../common/OverallRatingScore";
 import { popNotification } from "../common/ToastNotif";
 
 export const SubmitReviewForm = () => {
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const router = useRouter();
+  const predefinedModule = router.query.module
+    ? (router.query.module as string)
+    : "";
+
+  const [searchKeyword, setSearchKeyword] = useState(predefinedModule);
   const [modulesFiltered, setModulesFiltered] = useState<IModuleInformation[]>(
     []
   );
 
+  useEffect(() => {
+    if (router.query.module) {
+      setSearchKeyword(router.query.module as string);
+    }
+  }, [predefinedModule]);
+
   const { user } = useContext(UserContext);
-
   const debouncedSearch = useDebounce(searchKeyword, 0);
-
   const { isLoading } = useQuery(["modules", debouncedSearch], async () => {
-    if (searchKeyword) {
+    if (searchKeyword && !predefinedModule) {
       const data = await getAllModules();
       setModulesFiltered(
         data
@@ -41,11 +50,17 @@ export const SubmitReviewForm = () => {
 
   return (
     <Formik
-      initialValues={{ ...initialRatings, review_module_code: "" }}
+      initialValues={{
+        ...initialRatings,
+        review_module_code: predefinedModule,
+      }}
       validate={(values) => {
         const errors: any = {};
         if (!values.review_module_code || !searchKeyword) {
           errors.review_module_code = "Required";
+        }
+        if (predefinedModule) {
+          delete errors.review_module_code;
         }
         return errors;
       }}
@@ -54,6 +69,9 @@ export const SubmitReviewForm = () => {
         //   alert(JSON.stringify(values, null, 2));
         //   setSubmitting(false);
         // }, 400);
+        if (predefinedModule) {
+          values = { ...values, review_module_code: predefinedModule };
+        }
 
         const uploadFormData = async () => {
           await supabase
@@ -76,10 +94,12 @@ export const SubmitReviewForm = () => {
       }) => (
         <form onSubmit={handleSubmit} className="bg-white rounded pt-6 pb-8">
           <div className="mb-6">
+            {console.log(values)}
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Module
             </label>
             <input
+              disabled={predefinedModule !== ""}
               autoComplete="off"
               className=" appearance-none border rounded w-full lg:w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"

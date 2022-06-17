@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
@@ -45,6 +46,12 @@ const ModuleCodePage = () => {
       >
         Find out more on NUSMods
       </a>
+
+      <Link href={`/submit-review?module=${module.moduleCode}`}>
+        <button className="text-center bg-blue-100 hover:bg-blue-200  text-blue-700 rounded-md text-sm font-medium  p-2">
+          Submit a review
+        </button>
+      </Link>
     </>
   );
   const rightSection = (
