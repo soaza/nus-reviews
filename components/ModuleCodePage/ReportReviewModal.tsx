@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const ReportReviewModal = (props: {
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;

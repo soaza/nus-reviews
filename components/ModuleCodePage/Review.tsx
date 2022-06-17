@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useQuery } from "react-query";
 import {
   calculateOverallScore,
   parseDate,
@@ -13,6 +12,7 @@ import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 import { RatingBar } from "./RatingBar";
 import { ReportReviewModal } from "./ReportReviewModal";
+import { toast } from "react-toastify";
 
 export const Review = (props: {
   review: IReviewByUser;
@@ -44,6 +44,14 @@ export const Review = (props: {
     await supabase
       .from("ReportedReviews")
       .insert([{ review_id: review.review_id, user_id: currentUser.user_id }]);
+
+    toast.success("Reported Review", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      progress: undefined,
+    });
     refetchReviews();
   };
 

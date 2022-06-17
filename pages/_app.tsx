@@ -8,10 +8,12 @@ import { getRandomAvatarOptions } from "../utils/bighead-randomise";
 import { supabase } from "../utils/supabase";
 import { generateUniqueUserName } from "../utils/common";
 import { UserContext } from "../utils/context";
-
-import "../styles/index.css";
 import { IUser } from "../utils/interface";
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+
+import "../styles/index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -94,6 +96,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         </UserContext.Provider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
+
+      <ToastContainer />
     </>
   );
 };
