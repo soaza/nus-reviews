@@ -92,27 +92,27 @@ export const Review = (props: {
         </p>
         <div className="flex items-center mt-3 ">
           <button
-            disabled={review.reportedByUser}
             onClick={review.votedHelpfulByUser ? unvoteHelpful : voteHelpful}
-            className={`${
+            className={`
+            transition-all duration-200
+            ${
               review.votedHelpfulByUser
-                ? `bg-green-700 text-green-100 `
+                ? `bg-green-500 text-green-100 `
                 : `bg-green-100 text-green-700 hover:bg-green-200`
-            } rounded-md text-sm font-medium  p-2 transition ease-in-out delay-150 hover:scale-110`}
+            } rounded-md text-sm font-medium  p-2  ease-in-out delay-150 hover:scale-110`}
           >
             Helpful
           </button>
 
           <button
+            disabled={review.reportedByUser}
             onClick={() => {
-              if (!review.reportedByUser) {
-                setShowModal(true);
-              }
+              setShowModal(true);
             }}
             className={`
             ${
               review.reportedByUser
-                ? `bg-red-700 text-red-100 `
+                ? `bg-red-500 text-red-100 `
                 : `bg-red-100 text-red-700 hover:bg-red-200`
             }
             ml-4  rounded-md text-sm font-medium p-2 transition ease-in-out delay-150 hover:scale-110`}

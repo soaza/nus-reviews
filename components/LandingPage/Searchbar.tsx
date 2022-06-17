@@ -1,4 +1,3 @@
-import Module from "module";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useQuery } from "react-query";

@@ -15,8 +15,8 @@ export const ReportReviewModal = (props: {
 
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*body*/}
-                <div className="relative p-4 flex-auto">
-                  <p className=" font-medium text-lg leading-relaxed">
+                <div className="relative p-4 pb-0 flex-auto">
+                  <p className=" font-medium text-md leading-relaxed">
                     Confirm reporting review for inappropriate content?
                   </p>
                 </div>

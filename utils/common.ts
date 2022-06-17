@@ -8,11 +8,18 @@ import {
 import { SemesterData } from "./nus_module_interfaces";
 
 export const ratingTypes = [
-  "Difficulty",
-  "Workload",
-  "Practicality",
-  "Enjoyability",
+  "difficulty",
+  "workload",
+  "practicality",
+  "enjoyability",
 ];
+
+export const initialRatings = {
+  difficulty: 0,
+  workload: 0,
+  practicality: 0,
+  enjoyability: 0,
+};
 
 export const parseModuleSemesterData = (semesterData: SemesterData[]) => {
   const mappedSemesters = semesterData.map((semester, index) => {
@@ -53,4 +60,8 @@ export const calculateOverallScore = (values) => {
 
 export const parseDate = (date: Date) => {
   return moment(date).format("DD-MM-YYYY, hh:mm A");
+};
+
+export const capitaliseWord = (word: string) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 };

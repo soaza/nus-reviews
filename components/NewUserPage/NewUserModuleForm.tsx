@@ -3,7 +3,12 @@ import router from "next/router";
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
-import { calculateOverallScore, ratingTypes } from "../../utils/common";
+import {
+  calculateOverallScore,
+  capitaliseWord,
+  initialRatings,
+  ratingTypes,
+} from "../../utils/common";
 import { UserContext } from "../../utils/context";
 import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/nus_module_interfaces";
@@ -12,13 +17,6 @@ import { OverallRatingScore } from "../common/OverallRatingScore";
 import { popNotification } from "../common/ToastNotif";
 
 export const NewUserModuleForm = () => {
-  const initialRatings = {
-    Difficulty: 0,
-    Workload: 0,
-    Practicality: 0,
-    Enjoyability: 0,
-  };
-
   const [searchKeyword, setSearchKeyword] = useState("");
   const [modulesFiltered, setModulesFiltered] = useState<IModuleInformation[]>(
     []
@@ -51,10 +49,9 @@ export const NewUserModuleForm = () => {
         }
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         // setTimeout(() => {
         //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);
         // }, 400);
         const uploadFormData = async () => {
           const { data, error } = await supabase
@@ -122,7 +119,7 @@ export const NewUserModuleForm = () => {
             return (
               <div key={index} className="mb-6 ">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  {ratingType}
+                  {capitaliseWord(ratingType)}
                 </label>
                 <div className="flex flex-row gap-4 align-middle">
                   <input

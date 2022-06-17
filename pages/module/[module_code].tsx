@@ -35,7 +35,7 @@ const ModuleCodePage = () => {
         <div>{module.preclusion}</div>
       </div>
 
-      <OverallRating />
+      <OverallRating moduleCode={module.moduleCode} />
 
       <a
         className="text-center bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-md text-sm font-medium  p-2"
@@ -50,9 +50,6 @@ const ModuleCodePage = () => {
   const rightSection = (
     <>
       <Reviews moduleCode={module.moduleCode} />
-      {/* {[0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, index) => (
-        <Review key={index} />
-      ))} */}
     </>
   );
 

@@ -1,11 +1,12 @@
 import React from "react";
+import { capitaliseWord } from "../../utils/common";
 
 export const RatingBar = (props: { ratingType: string; rating: number }) => {
   const { ratingType, rating } = props;
   return (
     <dl>
       <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
-        {ratingType}
+        {capitaliseWord(ratingType)}
       </dt>
       <dd className="flex items-center mb-3">
         <div className="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
