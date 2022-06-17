@@ -1,4 +1,5 @@
 export interface IUser {
+  user_id: number;
   user_created_at: Date;
   user_avatar: any;
   user_uuid: string;

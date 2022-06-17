@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   calculateOverallScore,
   parseDate,
   ratingTypes,
 } from "../../utils/common";
+import { UserContext } from "../../utils/context";
 import { IReviewByUser } from "../../utils/interface";
+import { supabase } from "../../utils/supabase";
 import { Avatar } from "../Avatar";
 import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
@@ -12,8 +14,15 @@ import { RatingBar } from "./RatingBar";
 
 export const Review = (props: { review: IReviewByUser }) => {
   const { review } = props;
+  console.log(review);
+
+  // const { user } = useContext(UserContext);
 
   const { user_name, user_avatar } = review.Users;
+
+  const voteHelpful = async () => {
+    return;
+  };
 
   return (
     <div className="mb-4">
@@ -47,10 +56,6 @@ export const Review = (props: { review: IReviewByUser }) => {
       </footer>
 
       <p className="mb-2 font-light text-gray-500 dark:text-gray-400">
-        {/* Best module taken ever. If you do not take this module in your NUS life,
-        or SOC life, I can say you miss half of the fun you could have. But
-        prepare to die. This module is coming with great fun, and also great
-        stress and heavy work. */}
         {review.review_description}
       </p>
 
@@ -59,7 +64,10 @@ export const Review = (props: { review: IReviewByUser }) => {
           {review.review_helpful_count} people found this helpful
         </p>
         <div className="flex items-center mt-3 ">
-          <button className="bg-green-100 hover:bg-green-200 text-green-700 rounded-md text-sm font-medium  p-2">
+          <button
+            onClick={voteHelpful}
+            className="bg-green-100 hover:bg-green-200 text-green-700 rounded-md text-sm font-medium  p-2"
+          >
             Helpful
           </button>
           <button className="ml-4 bg-red-100 hover:bg-red-200 text-red-700 rounded-md text-sm font-medium  p-2">

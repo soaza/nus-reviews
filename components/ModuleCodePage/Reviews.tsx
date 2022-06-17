@@ -22,13 +22,17 @@ export const Reviews = (props: { moduleCode: string }) => {
   const { data: reviews, isLoading } = useQuery<IReviewByUser[]>(
     ["reviews", sortOption, moduleCode],
     async () => {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("Reviews")
-        .select(`*,Users(*)`)
+        .select(`*,Users!Reviews_review_user_fkey!inner(*)`)
         .eq(`review_module_code`, `${moduleCode}`)
         .order(sortMapping[sortOption].col, {
           ascending: sortMapping[sortOption].ascending,
         });
+
+      if (error) {
+        console.log(error);
+      }
 
       return data as any;
     }
