@@ -22,4 +22,5 @@ export interface IReview {
 export interface IReviewByUser extends IReview {
   Users: IUser;
   votedHelpfulByUser: boolean;
+  reportedByUser: boolean;
 }

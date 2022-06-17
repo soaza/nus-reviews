@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import {
   calculateOverallScore,
@@ -12,16 +12,18 @@ import { Avatar } from "../Avatar";
 import { Divider } from "../common/Divider";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 import { RatingBar } from "./RatingBar";
+import { ReportReviewModal } from "./ReportReviewModal";
 
 export const Review = (props: {
   review: IReviewByUser;
   refetchReviews: () => void;
 }) => {
   const { review, refetchReviews } = props;
+  const { user_name, user_avatar } = review.Users;
 
   const { user: currentUser } = useContext(UserContext);
 
-  const { user_name, user_avatar } = review.Users;
+  const [showModal, setShowModal] = useState(false);
 
   const voteHelpful = async () => {
     await supabase
@@ -35,6 +37,13 @@ export const Review = (props: {
       .from("HelpfulVotes")
       .delete()
       .match({ review_id: review.review_id, user_id: currentUser.user_id });
+    refetchReviews();
+  };
+
+  const reportReview = async () => {
+    await supabase
+      .from("ReportedReviews")
+      .insert([{ review_id: review.review_id, user_id: currentUser.user_id }]);
     refetchReviews();
   };
 
@@ -79,6 +88,7 @@ export const Review = (props: {
         </p>
         <div className="flex items-center mt-3 ">
           <button
+            disabled={review.reportedByUser}
             onClick={review.votedHelpfulByUser ? unvoteHelpful : voteHelpful}
             className={`${
               review.votedHelpfulByUser
@@ -88,11 +98,33 @@ export const Review = (props: {
           >
             Helpful
           </button>
-          <button className="ml-4 bg-red-100 hover:bg-red-200 text-red-700 rounded-md text-sm font-medium p-2 transition ease-in-out delay-150 hover:scale-110">
-            Report
+
+          <button
+            onClick={() => {
+              if (!review.reportedByUser) {
+                setShowModal(true);
+              }
+            }}
+            className={`
+            ${
+              review.reportedByUser
+                ? `bg-red-700 text-red-100 `
+                : `bg-red-100 text-red-700 hover:bg-red-200`
+            }
+            ml-4  rounded-md text-sm font-medium p-2 transition ease-in-out delay-150 hover:scale-110`}
+          >
+            {review.reportedByUser ? "Reported" : "Report"}
           </button>
         </div>
       </div>
+
+      {showModal && (
+        <ReportReviewModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          reportReview={reportReview}
+        />
+      )}
 
       {/* <div className="mt-4 text-center font-light text-gray-400">
         {" "}

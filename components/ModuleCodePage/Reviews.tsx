@@ -43,12 +43,26 @@ export const Reviews = (props: { moduleCode: string }) => {
           .select(`review_id`)
           .eq(`user_id`, `${currentUser.user_id}`);
 
+        const { data: reportedReviewsData } = await supabase
+          .from("ReportedReviews")
+          .select(`review_id`)
+          .eq(`user_id`, `${currentUser.user_id}`);
+
         const reviewsVoted = helpfulVotesData.map((data) => data.review_id);
+        const reviewsReported = reportedReviewsData.map(
+          (data) => data.review_id
+        );
+
         reviewData = reviewData.map((review) => {
           if (reviewsVoted.includes(review.review_id)) {
             review.votedHelpfulByUser = true;
           } else {
             review.votedHelpfulByUser = false;
+          }
+          if (reviewsReported.includes(review.review_id)) {
+            review.reportedByUser = true;
+          } else {
+            review.reportedByUser = false;
           }
           return review;
         });
