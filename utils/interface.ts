@@ -16,6 +16,7 @@ export interface IReview {
   review_description: String;
   review_module_code: String;
   review_user: String;
+  review_helpful_count: number;
 }
 
 export interface IReviewByUser extends IReview {

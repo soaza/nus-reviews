@@ -38,22 +38,6 @@ export const Review = (props: {
     refetchReviews();
   };
 
-  const { data: helpfulCount } = useQuery<IReviewByUser[]>(
-    ["review_helpful_count", review],
-    async () => {
-      const { data, error } = await supabase
-        .from("HelpfulVotes")
-        .select("*", { count: "exact" })
-        .eq("review_id", review.review_id);
-
-      if (error) {
-        console.log(error);
-      }
-
-      return data.length as any;
-    }
-  );
-
   return (
     <div className="mb-4">
       <div className="flex items-center mb-4 space-x-1">
@@ -91,7 +75,7 @@ export const Review = (props: {
 
       <div>
         <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-          {helpfulCount} people found this helpful
+          {review.review_helpful_count} people found this helpful
         </p>
         <div className="flex items-center mt-3 ">
           <button
@@ -100,11 +84,11 @@ export const Review = (props: {
               review.votedHelpfulByUser
                 ? `bg-green-700 text-green-100 `
                 : `bg-green-100 text-green-700 hover:bg-green-200`
-            } rounded-md text-sm font-medium  p-2`}
+            } rounded-md text-sm font-medium  p-2 transition ease-in-out delay-150 hover:scale-110`}
           >
             Helpful
           </button>
-          <button className="ml-4 bg-red-100 hover:bg-red-200 text-red-700 rounded-md text-sm font-medium  p-2">
+          <button className="ml-4 bg-red-100 hover:bg-red-200 text-red-700 rounded-md text-sm font-medium p-2 transition ease-in-out delay-150 hover:scale-110">
             Report
           </button>
         </div>

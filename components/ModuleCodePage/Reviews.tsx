@@ -1,4 +1,3 @@
-import { userInfo } from "os";
 import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { UserContext } from "../../utils/context";
