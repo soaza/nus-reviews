@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import router from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
 import {
@@ -9,7 +9,6 @@ import {
   initialRatings,
   ratingTypes,
 } from "../../utils/common";
-import { UserContext } from "../../utils/context";
 import useDebounce from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/nus_module_interfaces";
 import { supabase } from "../../utils/supabase";
@@ -21,8 +20,6 @@ export const NewUserModuleForm = () => {
   const [modulesFiltered, setModulesFiltered] = useState<IModuleInformation[]>(
     []
   );
-
-  const { user } = useContext(UserContext);
 
   const debouncedSearch = useDebounce(searchKeyword, 0);
 
@@ -54,13 +51,16 @@ export const NewUserModuleForm = () => {
         //   alert(JSON.stringify(values, null, 2));
         // }, 400);
         const uploadFormData = async () => {
-          const { data, error } = await supabase
-            .from("Reviews")
-            .insert([{ review_user: user.user_uuid, ...values }]);
+          const { data, error } = await supabase.from("Reviews").insert([
+            // we use localStorage here as context might not contain user data yet
+            { review_user: localStorage.getItem("userUuid"), ...values },
+          ]);
           popNotification("Review submitted!");
+          if (data) {
+            router.push("/new-user/complete");
+          }
         };
         uploadFormData();
-        router.push("/new-user/complete");
       }}
     >
       {({

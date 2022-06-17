@@ -44,7 +44,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     // For new users
     if (!localStorage.getItem("userUuid")) {
       initUser();
-      // router.push("new-user");
+      router.push("new-user");
     } else {
       const userUuid = localStorage.getItem("userUuid");
       const fetchUser = async () => {

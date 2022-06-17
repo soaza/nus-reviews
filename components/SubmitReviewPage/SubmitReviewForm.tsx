@@ -76,7 +76,7 @@ export const SubmitReviewForm = () => {
         const uploadFormData = async () => {
           await supabase
             .from("Reviews")
-            .insert([{ review_user: user.user_uuid, ...values }]);
+            .insert([{ review_user: user?.user_uuid, ...values }]);
           popNotification("Review submitted!");
         };
 
@@ -94,7 +94,6 @@ export const SubmitReviewForm = () => {
       }) => (
         <form onSubmit={handleSubmit} className="bg-white rounded pt-6 pb-8">
           <div className="mb-6">
-            {console.log(values)}
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Module
             </label>
