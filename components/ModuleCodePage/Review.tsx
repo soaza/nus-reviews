@@ -50,12 +50,12 @@ export const Review = (props: {
   };
 
   return (
-    <div className="mb-4">
-      <div className="flex items-center mb-4 space-x-1">
-        <div className=" w-20">
+    <div className="mb-4 w-80 lg:w-full">
+      <div className="flex items-center mb-4">
+        <div className="w-20">
           <Avatar avatarOption={user_avatar} />
         </div>
-        <div className="space-y-1 font-medium dark:text-white">
+        <div className="w-3/4 break-words font-light whitespace-pre-wrap dark:text-white">
           <p>{user_name} </p>
         </div>
       </div>

@@ -6,7 +6,11 @@ import { supabase } from "../utils/supabase";
 
 export const Avatar = (props: { avatarOption: any }) => {
   const { avatarOption } = props;
-  return <BigHead {...(avatarOption as any)} />;
+  return (
+    <div style={{ width: 80 }}>
+      <BigHead {...(avatarOption as any)} />
+    </div>
+  );
 };
 
 export const SelfAvatar = () => {

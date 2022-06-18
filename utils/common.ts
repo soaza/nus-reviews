@@ -2,7 +2,6 @@ import moment from "moment";
 import {
   uniqueNamesGenerator,
   adjectives,
-  colors,
   animals,
 } from "unique-names-generator";
 import { SemesterData } from "./nus_module_interfaces";
@@ -42,7 +41,7 @@ export const parseModuleSemesterData = (semesterData: SemesterData[]) => {
 
 export const generateUniqueUserName = () => {
   const randomName = uniqueNamesGenerator({
-    dictionaries: [adjectives, colors, animals],
+    dictionaries: [adjectives, animals],
   });
 
   return "anonymous_" + randomName;

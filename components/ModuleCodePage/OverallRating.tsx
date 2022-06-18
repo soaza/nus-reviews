@@ -22,7 +22,7 @@ export const OverallRating = (props: { moduleCode: string }) => {
   return (
     <>
       {data && (
-        <div>
+        <div className="">
           <div className="flex items-center mb-5">
             <OverallRatingScore score={calculateOverallScore(data)} />
 
