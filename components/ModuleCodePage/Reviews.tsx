@@ -13,10 +13,12 @@ export const Reviews = (props: { moduleCode: string }) => {
   const { user: currentUser } = useContext(UserContext);
 
   const [sortOption, setSortOption] = useState<
-    "Most Helpful" | "Recent" | "Oldest"
+    "Most Helpful" | "Recent" | "Oldest" | "Highest Score" | "Lowest Score"
   >("Recent");
 
   const sortMapping = {
+    "Lowest Score": { col: "total_score", ascending: true },
+    "Highest Score": { col: "total_score", ascending: false },
     "Most Helpful": { col: "review_helpful_count", ascending: false },
     Recent: { col: "review_created_at", ascending: false },
     Oldest: { col: "review_created_at", ascending: true },

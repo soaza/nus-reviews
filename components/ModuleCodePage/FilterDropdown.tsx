@@ -7,14 +7,32 @@ function classNames(...classes) {
 }
 
 interface IProps {
-  sortOption: "Most Helpful" | "Recent" | "Oldest";
+  sortOption:
+    | "Most Helpful"
+    | "Recent"
+    | "Oldest"
+    | "Highest Score"
+    | "Lowest Score";
 
-  setSortOption: (sortOption: "Most Helpful" | "Recent" | "Oldest") => void;
+  setSortOption: (
+    sortOption:
+      | "Most Helpful"
+      | "Recent"
+      | "Oldest"
+      | "Highest Score"
+      | "Lowest Score"
+  ) => void;
 }
 
 export const FilterDropdown = (props: IProps) => {
   const { sortOption, setSortOption } = props;
-  const sortingOptions = ["Most Helpful", "Recent", "Oldest"];
+  const sortingOptions = [
+    "Most Helpful",
+    "Recent",
+    "Oldest",
+    "Highest Score",
+    "Lowest Score",
+  ];
 
   return (
     <Menu as="div" className="relative inline-block text-left">

@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
 import {
   calculateOverallScore,
+  calculateTotalScore,
   capitaliseWord,
   initialRatings,
   ratingTypes,
@@ -41,7 +42,10 @@ export const NewUserModuleForm = () => {
 
   return (
     <Formik
-      initialValues={{ ...initialRatings, review_module_code: "" }}
+      initialValues={{
+        ...initialRatings,
+        review_module_code: "",
+      }}
       validate={(values) => {
         const errors: any = {};
         if (!values.review_module_code || !searchKeyword) {
@@ -54,9 +58,13 @@ export const NewUserModuleForm = () => {
         //   alert(JSON.stringify(values, null, 2));
         // }, 400);
         const uploadFormData = async () => {
-          const { data, error } = await supabase
-            .from("Reviews")
-            .insert([{ review_user: user.user_uuid, ...values }]);
+          const { data, error } = await supabase.from("Reviews").insert([
+            {
+              review_user: user.user_uuid,
+              total_score: calculateTotalScore(values),
+              ...values,
+            },
+          ]);
           popNotification("Review submitted!");
           if (data) {
             router.push("/new-user/complete");

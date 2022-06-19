@@ -47,6 +47,14 @@ export const generateUniqueUserName = () => {
   return "anonymous_" + randomName;
 };
 
+export const calculateTotalScore = (values) => {
+  return parseInt(
+    ratingTypes.reduce((x, y) => {
+      return x + values[y];
+    }, 0)
+  );
+};
+
 export const calculateOverallScore = (values) => {
   return (
     parseFloat(

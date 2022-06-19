@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
 import {
   calculateOverallScore,
+  calculateTotalScore,
   capitaliseWord,
   initialRatings,
   ratingTypes,
@@ -74,9 +75,15 @@ export const SubmitReviewForm = () => {
         }
 
         const uploadFormData = async () => {
-          await supabase
-            .from("Reviews")
-            .insert([{ review_user: user?.user_uuid, ...values }]);
+          const totalScore = calculateTotalScore(values);
+          await supabase.from("Reviews").insert([
+            {
+              review_user: user?.user_uuid,
+              total_score: totalScore,
+              ...values,
+            },
+          ]);
+
           popNotification("Review submitted!");
         };
 
