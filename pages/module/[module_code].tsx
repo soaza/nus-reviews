@@ -12,56 +12,61 @@ const ModuleCodePage = () => {
   const router = useRouter();
   const pageModuleCode = router.query.module_code as string;
 
-  const { data: module } = useQuery(["module", pageModuleCode], async () => {
-    if (pageModuleCode) {
-      const data = await getModule(pageModuleCode?.toUpperCase());
-      return data;
+  const { data: module, isLoading } = useQuery(
+    ["module", pageModuleCode],
+    async () => {
+      if (pageModuleCode) {
+        const data = await getModule(pageModuleCode?.toUpperCase());
+        return data;
+      }
     }
-  });
+  );
 
-  if (!module) {
+  if (!module && !isLoading) {
     return <div> Module not found.</div>;
   }
 
   const leftSection = (
-    <div className="">
-      <div className="break-words">{module.description}</div>
+    <>
+      {module && (
+        <div className="">
+          <div className="break-words">{module.description}</div>
 
-      <div>
-        <div className="font-medium text-xl w-3/4 break-words">
-          Prerequisite
+          <div>
+            <div className="font-medium text-xl w-3/4 break-words">
+              Prerequisite
+            </div>
+            <div>{module.prerequisite ? module.prerequisite : "-"}</div>
+          </div>
+          <div>
+            <div className="font-medium text-xl ">Preclusion</div>
+            <div className="w-3/4 break-words">{module.preclusion}</div>
+          </div>
+
+          <OverallRating moduleCode={module.moduleCode} />
+
+          <div className="flex flex-col gap-4">
+            <a
+              className="text-center bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-md text-sm font-medium  p-2"
+              target="_blank"
+              rel="noreferrer"
+              href={`https://nusmods.com/modules/${module.moduleCode}`}
+            >
+              Find out more on NUSMods
+            </a>
+
+            <Link href={`/submit-review?module=${module.moduleCode}`}>
+              <button className="text-center bg-blue-100 hover:bg-blue-200  text-blue-700 rounded-md text-sm font-medium  p-2">
+                Submit a review
+              </button>
+            </Link>
+          </div>
         </div>
-        <div>{module.prerequisite ? module.prerequisite : "-"}</div>
-      </div>
-      <div>
-        <div className="font-medium text-xl ">Preclusion</div>
-        <div className="w-3/4 break-words">{module.preclusion}</div>
-      </div>
-
-      <OverallRating moduleCode={module.moduleCode} />
-
-      <div className="flex flex-col gap-4">
-        <a
-          className="text-center bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-md text-sm font-medium  p-2"
-          target="_blank"
-          rel="noreferrer"
-          href={`https://nusmods.com/modules/${module.moduleCode}`}
-        >
-          Find out more on NUSMods
-        </a>
-
-        <Link href={`/submit-review?module=${module.moduleCode}`}>
-          <button className="text-center bg-blue-100 hover:bg-blue-200  text-blue-700 rounded-md text-sm font-medium  p-2">
-            Submit a review
-          </button>
-        </Link>
-      </div>
-    </div>
+      )}
+    </>
   );
   const rightSection = (
-    <>
-      <Reviews moduleCode={module.moduleCode} />
-    </>
+    <>{module && <Reviews moduleCode={module.moduleCode} />}</>
   );
 
   return (
