@@ -13,6 +13,7 @@ import { OverallRatingScore } from "../common/OverallRatingScore";
 import { popNotification } from "../common/ToastNotif";
 import { RatingBar } from "./RatingBar";
 import { ReportReviewModal } from "./ReportReviewModal";
+import parse from "html-react-parser";
 
 export const Review = (props: {
   review: IReviewByUser;
@@ -82,7 +83,7 @@ export const Review = (props: {
 
       {review.review_description && (
         <p className="mb-2 font-light text-gray-500 dark:text-gray-400 border-gray-300 border-2 rounded-lg p-4">
-          {review.review_description}
+          {parse(review.review_description as string)}
         </p>
       )}
 

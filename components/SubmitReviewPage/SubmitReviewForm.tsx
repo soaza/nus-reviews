@@ -16,6 +16,7 @@ import { IModuleInformation } from "../../utils/nus_module_interfaces";
 import { supabase } from "../../utils/supabase";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 import { popNotification } from "../common/ToastNotif";
+import { DescriptionEditor } from "./DescriptionEditor";
 
 export const SubmitReviewForm = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ export const SubmitReviewForm = () => {
     : "";
 
   const [searchKeyword, setSearchKeyword] = useState(predefinedModule);
+  const [description, setDescription] = useState("");
   const [modulesFiltered, setModulesFiltered] = useState<IModuleInformation[]>(
     []
   );
@@ -36,7 +38,7 @@ export const SubmitReviewForm = () => {
 
   const { user } = useContext(UserContext);
   const debouncedSearch = useDebounce(searchKeyword, 0);
-  const { isLoading } = useQuery(["modules", debouncedSearch], async () => {
+  useQuery(["modules", debouncedSearch], async () => {
     if (searchKeyword && !predefinedModule) {
       const data = await getAllModules();
       setModulesFiltered(
@@ -66,23 +68,24 @@ export const SubmitReviewForm = () => {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);
-        // }, 400);
         if (predefinedModule) {
           values = { ...values, review_module_code: predefinedModule };
         }
-
         const uploadFormData = async () => {
           const totalScore = calculateTotalScore(values);
           await supabase.from("Reviews").insert([
             {
               review_user: user?.user_uuid,
               total_score: totalScore,
+              review_description: description,
               ...values,
             },
           ]);
+
+          // setTimeout(() => {
+          //   alert(JSON.stringify(values, null, 2));
+          //   setSubmitting(false);
+          // }, 400);
 
           popNotification("Review submitted!");
         };
@@ -182,11 +185,8 @@ export const SubmitReviewForm = () => {
             <label className="block mb-2 text-sm font-bold dark:text-gray-300">
               Review (optional)
             </label>
-            <textarea
-              className="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 h-[30vh] sm:text-md focus:ring-blue-500 focus:border-blue-500 "
-              name="review_description"
-              onChange={handleChange}
-            />
+
+            <DescriptionEditor setDescription={setDescription} />
           </div>
 
           <div className="flex items-center justify-between">

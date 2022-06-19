@@ -16,9 +16,11 @@ import { IModuleInformation } from "../../utils/nus_module_interfaces";
 import { supabase } from "../../utils/supabase";
 import { OverallRatingScore } from "../common/OverallRatingScore";
 import { popNotification } from "../common/ToastNotif";
+import { DescriptionEditor } from "../SubmitReviewPage/DescriptionEditor";
 
 export const NewUserModuleForm = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [description, setDescription] = useState("");
   const [modulesFiltered, setModulesFiltered] = useState<IModuleInformation[]>(
     []
   );
@@ -54,14 +56,12 @@ export const NewUserModuleForm = () => {
         return errors;
       }}
       onSubmit={(values) => {
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        // }, 400);
         const uploadFormData = async () => {
           const { data, error } = await supabase.from("Reviews").insert([
             {
               review_user: user.user_uuid,
               total_score: calculateTotalScore(values),
+              review_description: description,
               ...values,
             },
           ]);
@@ -71,6 +71,9 @@ export const NewUserModuleForm = () => {
           }
         };
         uploadFormData();
+        // setTimeout(() => {
+        //   alert(JSON.stringify(values, null, 2));
+        // }, 400);
       }}
     >
       {({
@@ -161,11 +164,7 @@ export const NewUserModuleForm = () => {
             <label className="block mb-2 text-sm font-bold dark:text-gray-300">
               Review (optional)
             </label>
-            <textarea
-              className="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 h-[30vh] sm:text-md focus:ring-blue-500 focus:border-blue-500 "
-              name="review_description"
-              onChange={handleChange}
-            />
+            <DescriptionEditor setDescription={setDescription} />
           </div>
 
           <div className="flex items-center justify-between">
