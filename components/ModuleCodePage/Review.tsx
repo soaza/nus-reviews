@@ -56,7 +56,7 @@ export const Review = (props: {
         <div className="w-20">
           <Avatar avatarOption={user_avatar} />
         </div>
-        <div className="w-3/4 break-words font-light whitespace-pre-wrap dark:text-white">
+        <div className="w-3/4 break-words font-light whitespace-pre-wrap ">
           <p>{user_name} </p>
         </div>
       </div>
@@ -77,18 +77,18 @@ export const Review = (props: {
         })}
       </div>
 
-      <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400">
+      <footer className="mb-5 text-sm text-gray-500 ">
         <p>Reviewed on {parseDate(review.review_created_at)}</p>
       </footer>
 
       {review.review_description && (
-        <p className="mb-2 font-light text-gray-500 dark:text-gray-400 border-gray-300 border-2 rounded-lg p-4">
+        <p className="mb-2 font-light text-gray-500  border-gray-300 border-2 rounded-lg p-4">
           {parse(review.review_description as string)}
         </p>
       )}
 
       <div>
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+        <p className="mt-1 text-xs text-gray-500 ">
           {review.review_helpful_count} people found this helpful
         </p>
         <div className="flex items-center mt-3 ">

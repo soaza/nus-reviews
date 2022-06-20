@@ -142,7 +142,7 @@ export const NewUserModuleForm = () => {
                     max="5"
                     value={values[ratingType]}
                     onChange={handleChange}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer "
                   />
                   <div className=" text-base text-gray-400">
                     {values[ratingType]}/5
@@ -161,7 +161,7 @@ export const NewUserModuleForm = () => {
           </div>
 
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-bold dark:text-gray-300">
+            <label className="block mb-2 text-sm font-bold ">
               Review (optional)
             </label>
             <DescriptionEditor setDescription={setDescription} />

@@ -26,8 +26,8 @@ export const OverallRating = (props: { moduleCode: string }) => {
           <div className="flex items-center mb-5">
             <OverallRatingScore score={calculateOverallScore(data)} />
 
-            <span className="w-1 h-1 mx-2 bg-gray-900 rounded-full dark:bg-gray-500"></span>
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <span className="w-1 h-1 mx-2 bg-gray-900 rounded-full "></span>
+            <p className="text-sm font-medium text-gray-500 ">
               {data.total_count} reviews
             </p>
           </div>

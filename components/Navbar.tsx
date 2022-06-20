@@ -5,10 +5,10 @@ export const Navbar = () => {
   const NavbarItems = ["Submit Review"];
 
   return (
-    <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-800">
+    <nav className="bg-white border-gray-200 py-2.5 ">
       <div className="flex justify-between items-center">
         <Link href="/">
-          <a className="cursor-pointer self-center text-3xl font-semibold whitespace-nowrap dark:text-white">
+          <a className="cursor-pointer self-center text-3xl font-semibold whitespace-nowrap ">
             NUSReviews.
           </a>
         </Link>

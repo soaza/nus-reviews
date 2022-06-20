@@ -41,9 +41,7 @@ export const OverallRatingScore = (props: {
       </p>
 
       {!hideText && (
-        <p className="ml-2 font-medium text-gray-900 dark:text-white">
-          {scoreText()}
-        </p>
+        <p className="ml-2 font-medium text-gray-900 ">{scoreText()}</p>
       )}
     </>
   );
