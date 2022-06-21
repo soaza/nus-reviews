@@ -9,7 +9,7 @@ const criterias = [
     criteria: "Difficulty",
     description: `How difficult the
 module is, this can be in terms of how much technical or conceptual
-understanding is requried to ace the module`,
+understanding is required to ace the module`,
   },
   {
     criteria: "Workload",
