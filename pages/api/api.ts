@@ -45,11 +45,3 @@ export const getAllModules: () => Promise<Module[]> = async () => {
 
   return res;
 };
-
-// export const getCompanies: () => Promise<{
-//   companies: ICompany[];
-// }> = async () => {
-//   const res = await axiosWrapper({ url: "companies", method: "GET" });
-
-//   return res;
-// };
