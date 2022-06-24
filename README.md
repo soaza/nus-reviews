@@ -20,7 +20,9 @@ Features to be added in the near future:
 2. **User management**: Users can view/edit/delete their past submissions, as well as create their own avatar and nickname
 3. **Dark Mode**
 
-To track the current development progress, you can visit this kanban board on [Notion](https://mousy-coral-4d8.notion.site/NUSReviews-728a139a98764b92a00ca090076ffa16 "Notion Link").
+To track the current development progress, you can visit this kanban board [here](https://mousy-coral-4d8.notion.site/NUSReviews-728a139a98764b92a00ca090076ffa16 "Notion Link").
+
+To start contributing, check out the dev notes [here](https://mousy-coral-4d8.notion.site/NUSReviews-dev-5f98472b2db44e54a075de5caac7ba93).
 
 For any suggestions for future features, you can create a new issue in this repository! Of course, open-source contributions are welcomed!
 
