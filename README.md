@@ -1,6 +1,8 @@
 # NUSReviews
 Community-sourced reviews for NUS modules
 
+![nus-reviews](https://user-images.githubusercontent.com/65228562/186643851-8c7426fa-82c0-4abc-b2ed-6e63fefc8fcb.png)
+
 These reviews are based on different criteria:
 
 **Difficulty**: How difficult the module is, this can be in terms of how much technical or conceptual understanding is required to ace the module
