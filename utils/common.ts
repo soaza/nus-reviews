@@ -18,6 +18,7 @@ export const initialRatings = {
   workload: 0,
   practicality: 0,
   enjoyability: 0,
+  overall_score: 0,
 };
 
 export const parseModuleSemesterData = (semesterData: SemesterData[]) => {

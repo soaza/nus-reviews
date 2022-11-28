@@ -168,12 +168,26 @@ export const SubmitReviewForm = () => {
             );
           })}
 
+          <div className="mb-6 ">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Overall
+            </label>
+            <div className="flex flex-row gap-4 align-middle">
+              <input
+                type="range"
+                name={"overall_score"}
+                min="0"
+                max="5"
+                value={values.overall_score}
+                onChange={handleChange}
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              />
+            </div>
+          </div>
+
           <div className="text-center text-gray-400">
             Overall Score :{" "}
-            <OverallRatingScore
-              score={calculateOverallScore(values)}
-              hideText
-            />
+            <OverallRatingScore score={values.overall_score} hideText />
           </div>
 
           <div className="mb-6">
