@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllModules } from "../../pages/api/api";
@@ -67,7 +67,7 @@ export const SubmitReviewForm = () => {
         }
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         if (predefinedModule) {
           values = { ...values, review_module_code: predefinedModule };
         }
@@ -81,11 +81,6 @@ export const SubmitReviewForm = () => {
               ...values,
             },
           ]);
-
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);
-          // }, 400);
 
           popNotification("Review submitted!");
         };
