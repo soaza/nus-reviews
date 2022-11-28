@@ -9,21 +9,23 @@ export interface IUser {
 export interface IReview {
   review_id: number;
   review_created_at: Date;
-  difficulty: number;
-  enjoyability: number;
-  practicality: number;
-  workload: number;
   review_description: String;
   review_module_code: String;
   review_user: String;
   review_helpful_count: number;
+  difficulty: number;
+  enjoyability: number;
+  practicality: number;
+  workload: number;
+  overall_score: number;
 }
 
 export interface IOverallReview {
-  Difficulty: number;
-  Enjoyability: number;
-  Practicality: number;
-  Workload: number;
+  difficulty: number;
+  enjoyability: number;
+  practicality: number;
+  workload: number;
+  overall: number;
   total_count: number;
 }
 

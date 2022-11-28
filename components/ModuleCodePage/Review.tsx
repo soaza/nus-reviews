@@ -62,7 +62,7 @@ export const Review = (props: {
       </div>
 
       <div className="flex items-center mb-1">
-        <OverallRatingScore score={calculateOverallScore(review)} />
+        <OverallRatingScore score={review.overall_score} />
       </div>
 
       <div className="">

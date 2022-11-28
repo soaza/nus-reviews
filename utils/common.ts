@@ -58,8 +58,8 @@ export const calculateTotalScore = (values) => {
 export const calculateOverallScore = (values) => {
   return (
     parseFloat(
-      ratingTypes.reduce((x, y) => {
-        return x + values[y];
+      ratingTypes.reduce((sum, ratingType) => {
+        return sum + values[ratingType];
       }, 0)
     ) / 4
   );
