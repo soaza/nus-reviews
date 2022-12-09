@@ -24,14 +24,7 @@ export const MobileNavbar = () => {
           visible ? "max-h-screen" : "max-h-0"
         } overflow-hidden absolute top-0 left-0 w-screen`}
       >
-        <nav className="flex flex-row justify-between py-2.5 ">
-          {/* <Link href="/">
-            <a className="cursor-pointer self-center text-3xl font-semibold whitespace-nowrap ">
-              NUSReviews.
-            </a>
-          </Link> */}
-          <div />
-
+        <nav className="flex justify-end py-2.5 ">
           <Image
             onClick={() => {
               setVisible(false);
