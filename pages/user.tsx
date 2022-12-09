@@ -18,7 +18,7 @@ export const UserPage = () => {
       </div>
 
       <div className="col-span-8 flex flex-col align-middle justify-center">
-        <div className="text-xl lg:text-2xl lg:text-3xl font-semibold ">
+        <div className="text-xl lg:text-3xl font-semibold ">
           {user.user_name}
         </div>
         <div className="text-xl lg:text-2xl font-light ">
