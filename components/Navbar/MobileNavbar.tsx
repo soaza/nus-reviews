@@ -35,9 +35,11 @@ export const MobileNavbar = () => {
 
         <ul className=" my-48">
           <li className="flex flex-col gap-2">
-            <a className="block text-center bg-white border-black border hover:bg-gray-200 rounded-md cursor-pointer text-base p-2">
-              Leaderboard
-            </a>
+            <Link href={"/leaderboard"}>
+              <a className="block text-center bg-white border-black border hover:bg-gray-200 rounded-md cursor-pointer text-base p-2">
+                Leaderboard
+              </a>
+            </Link>
 
             <Link href={"/submit-review"}>
               <a className="block text-center bg-black text-white border-b border-gray-100 md:border-0 hover:bg-gray-700  rounded-md cursor-pointer text-base p-2">

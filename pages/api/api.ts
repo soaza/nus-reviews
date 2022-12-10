@@ -1,5 +1,6 @@
 import { Module } from "../../utils/nus_module_interfaces";
 import axios from "axios";
+import { supabase } from "../../utils/supabase";
 
 const BASE_URL = process.env.NEXT_PUBLIC_NUS_MODS_API;
 interface IFetchWrapper {
@@ -44,4 +45,11 @@ export const getAllModules: () => Promise<Module[]> = async () => {
   });
 
   return res;
+};
+
+// LEADERBOARD APIs
+export const getRankedModules: () => Promise<Module[]> = async () => {
+  const { data: modulesData } = await supabase.from("Reviews").select("*");
+
+  return modulesData;
 };

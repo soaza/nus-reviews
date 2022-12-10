@@ -20,9 +20,11 @@ export const Navbar = () => {
         {!mobile && (
           <ul className="flex md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium ">
             <li className="flex flex-row gap-2">
-              <a className="block bg-white border-black border hover:bg-gray-200 rounded-md cursor-pointer text-base p-2">
-                Leaderboard
-              </a>
+              <Link href={"/leaderboard"}>
+                <a className="block bg-white border-black border hover:bg-gray-200 rounded-md cursor-pointer text-base p-2">
+                  Leaderboard
+                </a>
+              </Link>
 
               <Link href={"/submit-review"}>
                 <a className="block bg-black text-white border-b border-gray-100 md:border-0 hover:bg-gray-700  rounded-md cursor-pointer text-base p-2">
