@@ -9,7 +9,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "GET") {
+  const { offset } = req.body;
+
+  if (req.method === "POST") {
     const result = await prisma.$queryRaw`
       SELECT review_module_code as module_code,COUNT(*) as review_count
       FROM "Reviews"

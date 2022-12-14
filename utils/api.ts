@@ -7,6 +7,7 @@ interface IFetchWrapper {
   url: string;
   method: "GET" | "POST" | "PUT" | "DELETE";
   baseUrl?: "INTERNAL" | "NUSMODS";
+  body?: Record<string, unknown>;
 }
 
 const mainAxios = axios.create({
@@ -17,7 +18,12 @@ const nusModsAxios = axios.create({
   baseURL: process.env.NEXT_PUBLIC_NUS_MODS_API,
 });
 
-const axiosWrapper = ({ url, method, baseUrl = "INTERNAL" }: IFetchWrapper) => {
+const axiosWrapper = ({
+  url,
+  method,
+  baseUrl = "INTERNAL",
+  body,
+}: IFetchWrapper) => {
   let axios;
 
   switch (baseUrl) {
@@ -28,15 +34,20 @@ const axiosWrapper = ({ url, method, baseUrl = "INTERNAL" }: IFetchWrapper) => {
       axios = nusModsAxios;
   }
 
+  let res;
+
   switch (method) {
     case "GET":
-      const res = axios.get(`${url}`).then((res) => {
+      res = axios.get(`${url}`).then((res) => {
         return res.data;
       });
       return res;
 
     case "POST":
-      break;
+      res = axios.post(`${url}`, body).then((res) => {
+        return res.data;
+      });
+      return res;
 
     case "PUT":
       break;
@@ -70,12 +81,13 @@ export const getAllModules: () => Promise<Module[]> = async () => {
 };
 
 // LEADERBOARD APIs
-export const getMostReviewedModules: () => Promise<
-  ILeaderboardModule[]
-> = async () => {
+export const getMostReviewedModules: (
+  maxRows?: number
+) => Promise<ILeaderboardModule[]> = async (maxRows?: number) => {
   const res = await axiosWrapper({
     url: "leaderboard/most_reviewed_modules",
-    method: "GET",
+    method: "POST",
+    body: { offset: maxRows },
   });
 
   return res;
