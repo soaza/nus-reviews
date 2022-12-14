@@ -37,7 +37,7 @@ export const OverallRatingScore = (props: {
       <p
         className={`bg-${scoreColor()}-100 text-${scoreColor()}-800  text-sm font-semibold inline-flex items-center p-1.5 rounded `}
       >
-        {score.toFixed(1)}
+        {score?.toFixed(1)}
       </p>
 
       {!hideText && (
