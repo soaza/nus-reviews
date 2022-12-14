@@ -14,7 +14,7 @@ const LeaderboardPage = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="text-5xl font-semibold">Leaderboard</div>
+      <div className="text-2xl lg:text-5xl font-semibold">Leaderboard</div>
 
       <div className="grid grid-rows-12 lg:grid-flow-col gap-4">
         {modules?.map((module, index) => {

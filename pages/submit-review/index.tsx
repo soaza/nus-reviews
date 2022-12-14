@@ -34,7 +34,9 @@ export const SubmitReviewPage: NextPage = () => {
   return (
     <div className="lg:grid grid-cols-12 gap-12">
       <div className="col-span-5 flex align-middle flex-col gap-4 ">
-        <div className="text-5xl font-semibold">Submitting a review</div>
+        <div className="text-2xl lg:text-5xl font-semibold">
+          Submitting a review
+        </div>
 
         <p className="text-md lg:text-lg font-light">
           Our reviews are based on 4 criterias:{" "}
