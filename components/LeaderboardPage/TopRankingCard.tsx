@@ -44,9 +44,11 @@ export const TopRankingCard = (props: {
     <Link href={`/module/${module.module_code}`}>
       <div
         style={{ backgroundColor: backgroundColor() }}
-        className={`cursor-pointer border-2 border-white p-6 text-center col-span-3 rounded-lg hover:scale-105 transition ease-in-out delay-150`}
+        className={`cursor-pointer border-2 border-white p-6 text-center rounded-lg hover:scale-105 transition ease-in-out delay-150`}
       >
-        <div className="text-3xl font-semibold"> {module.module_code}</div>
+        <div className="text-2xl lg:text-3xl font-semibold">
+          {module.module_code}
+        </div>
 
         <div className="text-md text-black"> {module.review_count} reviews</div>
 
