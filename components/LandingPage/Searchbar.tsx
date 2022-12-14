@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { getAllModules } from "../../pages/api/api";
+import { getAllModules } from "../../utils/api";
 import useDebounce, { useKeyPress } from "../../utils/hooks";
 import { IModuleInformation } from "../../utils/nus_module_interfaces";
 import router from "next/router";

@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import router from "next/router";
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
-import { getAllModules } from "../../pages/api/api";
+import { getAllModules } from "../../utils/api";
 import {
   calculateOverallScore,
   calculateTotalScore,
