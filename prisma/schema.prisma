@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model HelpfulVotes {
+  helpful_votes_id         BigInt    @default(autoincrement())
+  helpful_votes_created_at DateTime? @default(now()) @db.Timestamptz(6)
+  review_id                BigInt
+  user_id                  BigInt
+  Reviews                  Reviews   @relation(fields: [review_id], references: [review_id], onDelete: NoAction, onUpdate: NoAction)
+  Users                    Users     @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([review_id, user_id])
+}
+
+model ReportedReviews {
+  reported_reviews_id         BigInt    @default(autoincrement())
+  reported_reviews_created_at DateTime? @default(now()) @db.Timestamptz(6)
+  review_id                   BigInt
+  user_id                     BigInt
+  Reviews                     Reviews   @relation(fields: [review_id], references: [review_id], onDelete: NoAction, onUpdate: NoAction)
+  Users                       Users     @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([review_id, user_id])
+}
+
+model Reviews {
+  review_id            BigInt            @id @default(autoincrement())
+  review_created_at    DateTime?         @default(now()) @db.Timestamptz(6)
+  review_user          String?           @db.Uuid
+  review_module_code   String?           @db.VarChar
+  review_description   String?
+  difficulty           Decimal?          @db.Decimal
+  workload             Decimal?          @db.Decimal
+  practicality         Decimal?          @db.Decimal
+  enjoyability         Decimal?          @db.Decimal
+  review_helpful_count BigInt?           @default(0)
+  total_score          Float?            @default(0)
+  overall_score        Float?
+  HelpfulVotes         HelpfulVotes[]
+  ReportedReviews      ReportedReviews[]
+  Users                Users?            @relation(fields: [review_user], references: [user_uuid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Users {
+  user_id         BigInt            @id @default(autoincrement())
+  user_created_at DateTime?         @default(now()) @db.Timestamptz(6)
+  user_avatar     Json?             @db.Json
+  user_uuid       String?           @unique @db.Uuid
+  user_name       String?
+  HelpfulVotes    HelpfulVotes[]
+  ReportedReviews ReportedReviews[]
+  Reviews         Reviews[]
+}
