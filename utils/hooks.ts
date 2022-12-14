@@ -51,3 +51,23 @@ export const useKeyPress = (targetKey) => {
 
   return keyPressed;
 };
+
+export const useMobile = () => {
+  const [width, setWidth] = useState<number>(0);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    if (window) {
+      setWidth(window.outerWidth);
+    }
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  return width <= 768;
+};

@@ -6,7 +6,7 @@ import { Divider } from "../../components/common/Divider";
 import { OverallRating } from "../../components/ModuleCodePage/OverallRating";
 import { Reviews } from "../../components/ModuleCodePage/Reviews";
 import { parseModuleSemesterData } from "../../utils/common";
-import { getModule } from "../api/api";
+import { getModule } from "../../utils/api";
 
 const ModuleCodePage = () => {
   const router = useRouter();

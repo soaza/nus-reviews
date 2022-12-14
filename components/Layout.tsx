@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { SelfAvatar } from "./Avatar";
-import { Navbar } from "./Navbar";
+import { Navbar } from "./Navbar/Navbar";
 
 export const Layout = (props) => {
   const { children } = props;

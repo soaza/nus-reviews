@@ -39,6 +39,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         .from("Users")
         .select("*")
         .eq("user_uuid", userUuid);
+
       setUser(userData[0]);
     };
     insertUser();
