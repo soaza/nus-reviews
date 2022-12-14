@@ -34,3 +34,8 @@ export interface IReviewByUser extends IReview {
   votedHelpfulByUser: boolean;
   reportedByUser: boolean;
 }
+
+export interface ILeaderboardModule {
+  module_code: string;
+  review_count: number;
+}

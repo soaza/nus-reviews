@@ -1,6 +1,7 @@
 import { Module } from "./nus_module_interfaces";
 import axios from "axios";
 import { supabase } from "./supabase";
+import { ILeaderboardModule } from "./interface";
 
 interface IFetchWrapper {
   url: string;
@@ -9,7 +10,7 @@ interface IFetchWrapper {
 }
 
 const mainAxios = axios.create({
-  baseURL: "",
+  baseURL: "api",
 });
 
 const nusModsAxios = axios.create({
@@ -69,8 +70,13 @@ export const getAllModules: () => Promise<Module[]> = async () => {
 };
 
 // LEADERBOARD APIs
-export const getRankedModules: () => Promise<Module[]> = async () => {
-  const { data: modulesData } = await supabase.from("Reviews").select("*");
+export const getMostReviewedModules: () => Promise<
+  ILeaderboardModule[]
+> = async () => {
+  const res = await axiosWrapper({
+    url: "leaderboard/most_reviewed_modules",
+    method: "GET",
+  });
 
-  return modulesData;
+  return res;
 };
