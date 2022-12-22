@@ -4,7 +4,7 @@ import { Spinner } from "../../components/common/Spinner";
 import { FilterBar } from "../../components/LeaderboardPage/FilterBar";
 import { LeaderboardRow } from "../../components/LeaderboardPage/LeaderboardRow";
 import { TopRankingCard } from "../../components/LeaderboardPage/TopRankingCard";
-import { getMostReviewedModules } from "../../utils/api";
+import { getLeaderboardModules } from "../../utils/api";
 import { TLeaderboardCategory } from "../../utils/interface";
 
 const LeaderboardPage = () => {
@@ -17,7 +17,7 @@ const LeaderboardPage = () => {
     isFetching,
     refetch,
   } = useQuery(["leaderboard_modules"], async () => {
-    const data = await getMostReviewedModules(selectedTab);
+    const data = await getLeaderboardModules(selectedTab);
     return data;
   });
 

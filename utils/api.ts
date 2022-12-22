@@ -81,7 +81,7 @@ export const getAllModules: () => Promise<Module[]> = async () => {
 };
 
 // LEADERBOARD APIs
-export const getMostReviewedModules: (
+export const getLeaderboardModules: (
   selectedCategory,
   maxRows?: number
 ) => Promise<ILeaderboardModule[]> = async (

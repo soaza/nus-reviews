@@ -29,7 +29,7 @@ export const LeaderboardRow = (props: {
         </div>
 
         <div className="text-xl font-medium ">
-          {formatLeaderboardScore(module.review_count)}{" "}
+          {formatLeaderboardScore(module.review_metric)}{" "}
           {leaderboardCategoryMetricMapping[selectedTab]}
         </div>
       </div>

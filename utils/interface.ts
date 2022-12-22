@@ -37,7 +37,7 @@ export interface IReviewByUser extends IReview {
 
 export interface ILeaderboardModule {
   module_code: string;
-  review_count: number;
+  review_metric: number;
 }
 
 export type TLeaderboardCategory =

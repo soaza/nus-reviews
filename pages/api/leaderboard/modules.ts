@@ -19,7 +19,7 @@ export default async function handler(
     switch (selected_category) {
       case "most_reviewed":
         result = await prisma.$queryRaw`
-        SELECT review_module_code as module_code,COUNT(*) as review_count
+        SELECT review_module_code as module_code,COUNT(*) as review_metric
         FROM "Reviews"
         GROUP BY review_module_code 
         ORDER BY COUNT(*) DESC`;
@@ -27,11 +27,20 @@ export default async function handler(
 
       case "top_rated_modules":
         result = await prisma.$queryRaw`
-        SELECT review_module_code as module_code,AVG(overall_score) as review_count
+        SELECT review_module_code as module_code,AVG(overall_score) as review_metric
         FROM "Reviews"
         GROUP BY review_module_code 
         HAVING COUNT(*) > 5
         ORDER BY AVG(overall_score) DESC`;
+        break;
+
+      case "top_rated_general_modules":
+        result = await prisma.$queryRaw`
+          SELECT review_module_code as module_code,AVG(overall_score) as review_metric
+          FROM "Reviews"
+          GROUP BY review_module_code 
+          HAVING review_module_code LIKE 'GE%'
+          ORDER BY AVG(overall_score) DESC`;
         break;
     }
 

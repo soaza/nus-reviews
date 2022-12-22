@@ -59,7 +59,7 @@ export const TopRankingCard = (props: {
         </div>
 
         <div className="text-md text-black">
-          {formatLeaderboardScore(module.review_count)}{" "}
+          {formatLeaderboardScore(module.review_metric)}{" "}
           {leaderboardCategoryMetricMapping[selectedTab]}
         </div>
 
