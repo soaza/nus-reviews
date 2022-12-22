@@ -39,3 +39,10 @@ export interface ILeaderboardModule {
   module_code: string;
   review_count: number;
 }
+
+export type TLeaderboardCategory =
+  | "most_reviewed"
+  | "top_rated_modules"
+  | "top_rated_general_modules";
+
+export type TLeaderboardMetric = "reviews" | "overall score";

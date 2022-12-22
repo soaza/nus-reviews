@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { FilterBarTab } from "./FilterBarTab";
 
-export const FilterBar = () => {
+export const FilterBar = (props: { selectedTab; setSelectedTab }) => {
+  const { selectedTab, setSelectedTab } = props;
+
   const TAB_CATEGORIES = [
     {
       name: "most_reviewed",
@@ -16,8 +18,6 @@ export const FilterBar = () => {
       label: "📚 Top Rated General Modules",
     },
   ];
-
-  const [selectedTab, setSelectedTab] = useState("most_reviewed");
 
   return (
     <ul className="flex flex-wrap text-sm font-medium text-center text-white">

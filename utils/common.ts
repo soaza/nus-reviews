@@ -4,6 +4,7 @@ import {
   adjectives,
   animals,
 } from "unique-names-generator";
+import { TLeaderboardCategory, TLeaderboardMetric } from "./interface";
 import { SemesterData } from "./nus_module_interfaces";
 
 export const ratingTypes = [
@@ -72,4 +73,16 @@ export const parseDate = (date: Date) => {
 
 export const capitaliseWord = (word: string) => {
   return word.charAt(0).toUpperCase() + word.slice(1);
+};
+
+export const leaderboardCategoryMetricMapping: {
+  [key in TLeaderboardCategory]: TLeaderboardMetric;
+} = {
+  most_reviewed: "reviews",
+  top_rated_modules: "overall score",
+  top_rated_general_modules: "overall score",
+};
+
+export const formatLeaderboardScore = (score: number) => {
+  return parseFloat(score.toFixed(2));
 };

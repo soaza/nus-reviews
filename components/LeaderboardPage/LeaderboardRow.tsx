@@ -1,12 +1,20 @@
 import Link from "next/link";
 import React from "react";
-import { ILeaderboardModule } from "../../utils/interface";
+import {
+  formatLeaderboardScore,
+  leaderboardCategoryMetricMapping,
+} from "../../utils/common";
+import {
+  ILeaderboardModule,
+  TLeaderboardCategory,
+} from "../../utils/interface";
 
 export const LeaderboardRow = (props: {
   module: ILeaderboardModule;
   ranking?: number;
+  selectedTab: TLeaderboardCategory;
 }) => {
-  const { module, ranking } = props;
+  const { module, ranking, selectedTab } = props;
 
   return (
     <Link href={`/module/${module.module_code}`}>
@@ -21,8 +29,8 @@ export const LeaderboardRow = (props: {
         </div>
 
         <div className="text-xl font-medium ">
-          {" "}
-          {module.review_count} reviews
+          {formatLeaderboardScore(module.review_count)}{" "}
+          {leaderboardCategoryMetricMapping[selectedTab]}
         </div>
       </div>
     </Link>

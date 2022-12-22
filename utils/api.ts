@@ -82,12 +82,16 @@ export const getAllModules: () => Promise<Module[]> = async () => {
 
 // LEADERBOARD APIs
 export const getMostReviewedModules: (
+  selectedCategory,
   maxRows?: number
-) => Promise<ILeaderboardModule[]> = async (maxRows?: number) => {
+) => Promise<ILeaderboardModule[]> = async (
+  selectedCategory,
+  maxRows?: number
+) => {
   const res = await axiosWrapper({
-    url: "leaderboard/most_reviewed_modules",
+    url: "leaderboard/modules",
     method: "POST",
-    body: { offset: maxRows },
+    body: { offset: maxRows, selected_category: selectedCategory },
   });
 
   return res;
