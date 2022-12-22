@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import { Spinner } from "../../components/common/Spinner";
+import { FilterBar } from "../../components/LeaderboardPage/FilterBar";
 import { LeaderboardRow } from "../../components/LeaderboardPage/LeaderboardRow";
 import { TopRankingCard } from "../../components/LeaderboardPage/TopRankingCard";
 import { getMostReviewedModules } from "../../utils/api";
@@ -7,14 +9,21 @@ import { getMostReviewedModules } from "../../utils/api";
 const LeaderboardPage = () => {
   const [maxRows, setMaxRows] = useState(10);
 
-  const { data: modules } = useQuery(["most_reviewed_modules"], async () => {
-    const data = await getMostReviewedModules();
-    return data;
-  });
+  const { data: modules, isLoading } = useQuery(
+    ["most_reviewed_modules"],
+    async () => {
+      const data = await getMostReviewedModules();
+      return data;
+    }
+  );
 
   return (
     <div className="flex flex-col gap-4">
       <div className="text-2xl lg:text-5xl font-semibold">Leaderboard</div>
+
+      <FilterBar />
+
+      {isLoading && <Spinner />}
 
       <div className="grid grid-rows-12 lg:grid-flow-col gap-4">
         {modules?.map((module, index) => {
