@@ -20,7 +20,7 @@ export const FilterBar = (props: { selectedTab; setSelectedTab }) => {
   ];
 
   return (
-    <ul className="flex flex-wrap text-sm font-medium text-center text-white">
+    <ul className="flex flex-col lg:flex-row flex-wrap text-sm font-medium text-center text-white">
       {TAB_CATEGORIES.map((category) => {
         return (
           <FilterBarTab

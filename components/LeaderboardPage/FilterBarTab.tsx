@@ -8,7 +8,7 @@ export const FilterBarTab = (props: { category; active; setSelectedTab }) => {
       <li className="mr-2">
         <div
           onClick={() => setSelectedTab(category.name)}
-          className={`inline-block py-3 px-4 cursor-pointer ${
+          className={`mt-4 py-3 px-4 cursor-pointer ${
             active
               ? "bg-black text-white"
               : "bg-white border-black border text-black hover:bg-gray-200"
