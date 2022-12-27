@@ -1,12 +1,20 @@
 import Link from "next/link";
 import React from "react";
-import { ILeaderboardModule } from "../../utils/interface";
+import {
+  formatLeaderboardScore,
+  leaderboardCategoryMetricMapping,
+} from "../../utils/common";
+import {
+  ILeaderboardModule,
+  TLeaderboardCategory,
+} from "../../utils/interface";
 
 export const TopRankingCard = (props: {
   module: ILeaderboardModule;
   ranking?: number;
+  selectedTab: TLeaderboardCategory;
 }) => {
-  const { module, ranking } = props;
+  const { module, ranking, selectedTab } = props;
 
   const backgroundColor = () => {
     switch (ranking) {
@@ -50,7 +58,10 @@ export const TopRankingCard = (props: {
           {module.module_code}
         </div>
 
-        <div className="text-md text-black"> {module.review_count} reviews</div>
+        <div className="text-md text-black">
+          {formatLeaderboardScore(module.review_metric)}{" "}
+          {leaderboardCategoryMetricMapping[selectedTab]}
+        </div>
 
         <div className="text-sm inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-black text-white rounded-full">
           {rankingPlacement()}

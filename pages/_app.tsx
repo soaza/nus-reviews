@@ -17,7 +17,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 const { v4: uuidv4 } = require("uuid");
 
-const queryClient = new QueryClient({});
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();

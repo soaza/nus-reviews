@@ -26,6 +26,16 @@ export const Layout = (props) => {
         </div>
       </Link>
 
+      <div className=" p-2 text-center font-medium bg-black text-white">
+        ❗️ Currently, there are a lack of reviews on the platform,especially
+        for GE-coded modules,we would appreciate new reviews which can be
+        submitted{" "}
+        <span className="font-bold underline">
+          <Link href={"/submit-review"}>here</Link>
+        </span>
+        !
+      </div>
+
       <div className="p-4 lg:px-16">
         <Navbar />
 

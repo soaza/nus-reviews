@@ -1,7 +1,12 @@
 import { Module } from "./nus_module_interfaces";
 import axios from "axios";
 import { supabase } from "./supabase";
-import { ILeaderboardModule } from "./interface";
+import {
+  ILeaderboardModule,
+  IReview,
+  IReviewByUser,
+  IReviewByUserLeaderboard,
+} from "./interface";
 
 interface IFetchWrapper {
   url: string;
@@ -81,11 +86,27 @@ export const getAllModules: () => Promise<Module[]> = async () => {
 };
 
 // LEADERBOARD APIs
-export const getMostReviewedModules: (
+export const getLeaderboardModules: (
+  selectedCategory,
   maxRows?: number
-) => Promise<ILeaderboardModule[]> = async (maxRows?: number) => {
+) => Promise<ILeaderboardModule[]> = async (
+  selectedCategory,
+  maxRows?: number
+) => {
   const res = await axiosWrapper({
-    url: "leaderboard/most_reviewed_modules",
+    url: "leaderboard/modules",
+    method: "POST",
+    body: { offset: maxRows, selected_category: selectedCategory },
+  });
+
+  return res;
+};
+
+export const getMostHelpfulReviews: (
+  maxRows?: number
+) => Promise<IReviewByUserLeaderboard[]> = async (maxRows?: number) => {
+  const res = await axiosWrapper({
+    url: "leaderboard/reviews",
     method: "POST",
     body: { offset: maxRows },
   });

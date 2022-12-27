@@ -35,7 +35,21 @@ export interface IReviewByUser extends IReview {
   reportedByUser: boolean;
 }
 
+export interface IReviewByUserLeaderboard extends IReview {
+  user_avatar: any;
+  user_name: string;
+}
+
 export interface ILeaderboardModule {
   module_code: string;
-  review_count: number;
+  review_metric: number;
 }
+
+export type TLeaderboardCategory =
+  | "most_reviewed"
+  | "top_rated_modules"
+  | "top_rated_general_modules"
+  | "top_rated_cs_modules"
+  | "most_helpful_reviews";
+
+export type TLeaderboardMetric = "reviews" | "score";
