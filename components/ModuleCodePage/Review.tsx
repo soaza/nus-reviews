@@ -79,9 +79,9 @@ export const Review = (props: {
       </footer>
 
       {review.review_description && (
-        <p className="mb-2 font-light text-gray-500  border-gray-300 border-2 rounded-lg p-4">
+        <div className="mb-2 font-light text-gray-500  border-gray-300 border-2 rounded-lg p-4">
           {parse(review.review_description as string)}
-        </p>
+        </div>
       )}
 
       <div>

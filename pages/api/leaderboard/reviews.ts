@@ -13,7 +13,7 @@ export default async function handler(
     let result;
 
     result = await prisma.$queryRaw`
-        SELECT * FROM (SELECT * FROM "Reviews" ORDER BY "review_helpful_count" DESC LIMIT 10) AS X  inner join "Users" on "Users".user_uuid = X.review_user`;
+        SELECT * FROM (SELECT * FROM "Reviews" ORDER BY "review_helpful_count" DESC LIMIT 5) AS X inner join "Users" on "Users".user_uuid = X.review_user`;
 
     res.json(result);
   }
