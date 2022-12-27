@@ -111,7 +111,5 @@ export const getMostHelpfulReviews: (
     body: { offset: maxRows },
   });
 
-  console.log(res);
-
   return res;
 };
