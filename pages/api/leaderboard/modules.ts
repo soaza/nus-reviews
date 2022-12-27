@@ -42,6 +42,15 @@ export default async function handler(
           HAVING review_module_code LIKE 'GE%'
           ORDER BY AVG(overall_score) DESC`;
         break;
+
+      case "top_rated_cs_modules":
+        result = await prisma.$queryRaw`
+            SELECT review_module_code as module_code,AVG(overall_score) as review_metric
+            FROM "Reviews"
+            GROUP BY review_module_code 
+            HAVING review_module_code LIKE 'CS%'
+            ORDER BY AVG(overall_score) DESC`;
+        break;
     }
 
     res.json(result);

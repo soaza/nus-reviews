@@ -17,6 +17,10 @@ export const FilterBar = (props: { selectedTab; setSelectedTab }) => {
       name: "top_rated_general_modules",
       label: "📚 Top Rated General Modules",
     },
+    {
+      name: "top_rated_cs_modules",
+      label: "🤖 Top Rated CS Modules",
+    },
   ];
 
   return (

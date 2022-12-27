@@ -43,6 +43,7 @@ export interface ILeaderboardModule {
 export type TLeaderboardCategory =
   | "most_reviewed"
   | "top_rated_modules"
-  | "top_rated_general_modules";
+  | "top_rated_general_modules"
+  | "top_rated_cs_modules";
 
 export type TLeaderboardMetric = "reviews" | "score";
