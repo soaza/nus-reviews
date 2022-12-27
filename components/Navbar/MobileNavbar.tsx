@@ -26,8 +26,8 @@ export const MobileNavbar = () => {
       )}
 
       <div
-        className={`p-4 z-50 bg-white ${
-          visible ? "h-screen" : "h-0"
+        className={` bg-white ${
+          visible ? "h-screen p-4 z-50" : "h-0"
         } overflow-hidden absolute top-0 left-0 w-screen`}
       >
         <nav className="flex justify-end py-2.5 ">
