@@ -67,7 +67,7 @@ const LeaderboardPage = () => {
               }
             })}
           </div>
-          {modules.length > 10 && (
+          {modules.length > maxRows && (
             <div
               onClick={() => {
                 setMaxRows((prevState) => prevState + 10);

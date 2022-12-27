@@ -84,5 +84,5 @@ export const leaderboardCategoryMetricMapping: {
 };
 
 export const formatLeaderboardScore = (score: number) => {
-  return parseFloat(score.toFixed(2));
+  return parseFloat(score.toFixed(1));
 };
