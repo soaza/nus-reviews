@@ -8,8 +8,12 @@ import { getLeaderboardModules } from "../../utils/api";
 import { useLeaderboardStore } from "../../zustand/store";
 
 const LeaderboardPage = () => {
-  const [maxRows, setMaxRows] = useState(10);
   const category = useLeaderboardStore((state) => state.category);
+  const maxRows = useLeaderboardStore((state) => state.maxRows);
+  const setMaxRows = useLeaderboardStore((state) => state.setMaxRows);
+  const incrementMaxRows = useLeaderboardStore(
+    (state) => state.incrementMaxRows
+  );
 
   const {
     data: modules,
@@ -70,10 +74,11 @@ const LeaderboardPage = () => {
               }
             })}
           </div>
-          {modules.length > 10 && (
+
+          {modules.length > maxRows && (
             <div
               onClick={() => {
-                setMaxRows((prevState) => prevState + 10);
+                incrementMaxRows();
               }}
               className=" place-self-center bg-white border-black border hover:bg-gray-200 rounded-md cursor-pointer text-base p-2 font-medium"
             >

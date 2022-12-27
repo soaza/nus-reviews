@@ -48,7 +48,7 @@ export default async function handler(
             SELECT review_module_code as module_code,AVG(overall_score) as review_metric
             FROM "Reviews"
             GROUP BY review_module_code 
-            HAVING review_module_code LIKE 'CS%'
+            HAVING COUNT(*) > 5 AND review_module_code LIKE 'CS%'
             ORDER BY AVG(overall_score) DESC`;
         break;
     }
