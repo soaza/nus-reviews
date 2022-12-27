@@ -3,8 +3,10 @@ import { useQuery } from "react-query";
 import { Spinner } from "../../components/common/Spinner";
 import { FilterBar } from "../../components/LeaderboardPage/FilterBar";
 import { LeaderboardRow } from "../../components/LeaderboardPage/LeaderboardRow";
+import { ReviewsBoard } from "../../components/LeaderboardPage/ReviewsBoard";
 import { TopRankingCard } from "../../components/LeaderboardPage/TopRankingCard";
-import { getLeaderboardModules } from "../../utils/api";
+import { Review } from "../../components/ModuleCodePage/Review";
+import { getLeaderboardModules, getMostHelpfulReviews } from "../../utils/api";
 import { useLeaderboardStore } from "../../zustand/store";
 
 const LeaderboardPage = () => {
@@ -20,8 +22,12 @@ const LeaderboardPage = () => {
     isFetching,
     refetch,
   } = useQuery(["leaderboard_modules"], async () => {
-    const data = await getLeaderboardModules(category);
-    return data;
+    if (category !== "most_helpful_reviews") {
+      const data = await getLeaderboardModules(category);
+      return data;
+    } else {
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -37,7 +43,7 @@ const LeaderboardPage = () => {
 
       {isFetching && <Spinner />}
 
-      {!isFetching && (
+      {!isFetching && category !== "most_helpful_reviews" && (
         <>
           {/* TOP 3 */}
           <div className="grid grid-rows-12 lg:grid-flow-col gap-4">
@@ -87,6 +93,8 @@ const LeaderboardPage = () => {
           )}
         </>
       )}
+
+      {category === "most_helpful_reviews" && <ReviewsBoard />}
     </div>
   );
 };

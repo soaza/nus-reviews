@@ -1,9 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  calculateOverallScore,
-  parseDate,
-  ratingTypes,
-} from "../../utils/common";
+import { parseDate, ratingTypes } from "../../utils/common";
 import { UserContext } from "../../utils/context";
 import { IReviewByUser } from "../../utils/interface";
 import { supabase } from "../../utils/supabase";
@@ -20,6 +16,7 @@ export const Review = (props: {
   refetchReviews: () => void;
 }) => {
   const { review, refetchReviews } = props;
+
   const { user_name, user_avatar } = review.Users;
 
   const { user: currentUser } = useContext(UserContext);

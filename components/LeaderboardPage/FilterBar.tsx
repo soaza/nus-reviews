@@ -25,6 +25,11 @@ export const FilterBar = (props: { selectedTab }) => {
       label: "🤖 Top Rated CS Modules",
       moreThanFiveReviews: true,
     },
+    {
+      name: "most_helpful_reviews",
+      label: "😇 Most Helpful Reviews",
+      moreThanFiveReviews: false,
+    },
   ];
 
   return (

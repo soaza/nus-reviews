@@ -82,6 +82,7 @@ export const leaderboardCategoryMetricMapping: {
   top_rated_modules: "score",
   top_rated_general_modules: "score",
   top_rated_cs_modules: "score",
+  most_helpful_reviews: "score",
 };
 
 export const formatLeaderboardScore = (score: number) => {
