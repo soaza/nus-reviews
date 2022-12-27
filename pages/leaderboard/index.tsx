@@ -5,32 +5,31 @@ import { FilterBar } from "../../components/LeaderboardPage/FilterBar";
 import { LeaderboardRow } from "../../components/LeaderboardPage/LeaderboardRow";
 import { TopRankingCard } from "../../components/LeaderboardPage/TopRankingCard";
 import { getLeaderboardModules } from "../../utils/api";
-import { TLeaderboardCategory } from "../../utils/interface";
+import { useLeaderboardStore } from "../../zustand/store";
 
 const LeaderboardPage = () => {
   const [maxRows, setMaxRows] = useState(10);
-  const [selectedTab, setSelectedTab] =
-    useState<TLeaderboardCategory>("most_reviewed");
+  const category = useLeaderboardStore((state) => state.category);
 
   const {
     data: modules,
     isFetching,
     refetch,
   } = useQuery(["leaderboard_modules"], async () => {
-    const data = await getLeaderboardModules(selectedTab);
+    const data = await getLeaderboardModules(category);
     return data;
   });
 
   useEffect(() => {
     refetch();
     setMaxRows(10);
-  }, [selectedTab]);
+  }, [category]);
 
   return (
     <div className="flex flex-col gap-4">
       <div className="text-2xl lg:text-5xl font-semibold">Leaderboard</div>
 
-      <FilterBar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+      <FilterBar selectedTab={category} />
 
       {isFetching && <Spinner />}
 
@@ -47,7 +46,7 @@ const LeaderboardPage = () => {
                     key={index}
                     module={module}
                     ranking={ranking}
-                    selectedTab={selectedTab}
+                    selectedTab={category}
                   />
                 );
               }
@@ -65,7 +64,7 @@ const LeaderboardPage = () => {
                     key={index}
                     module={module}
                     ranking={ranking}
-                    selectedTab={selectedTab}
+                    selectedTab={category}
                   />
                 );
               }

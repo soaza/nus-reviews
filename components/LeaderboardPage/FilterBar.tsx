@@ -1,8 +1,8 @@
 import React from "react";
 import { FilterBarTab } from "./FilterBarTab";
 
-export const FilterBar = (props: { selectedTab; setSelectedTab }) => {
-  const { selectedTab, setSelectedTab } = props;
+export const FilterBar = (props: { selectedTab }) => {
+  const { selectedTab } = props;
 
   const TAB_CATEGORIES = [
     {
@@ -31,7 +31,6 @@ export const FilterBar = (props: { selectedTab; setSelectedTab }) => {
             key={index}
             active={selectedTab === category.name}
             category={category}
-            setSelectedTab={setSelectedTab}
           />
         );
       })}
