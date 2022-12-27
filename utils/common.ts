@@ -79,8 +79,8 @@ export const leaderboardCategoryMetricMapping: {
   [key in TLeaderboardCategory]: TLeaderboardMetric;
 } = {
   most_reviewed: "reviews",
-  top_rated_modules: "overall score",
-  top_rated_general_modules: "overall score",
+  top_rated_modules: "score",
+  top_rated_general_modules: "score",
 };
 
 export const formatLeaderboardScore = (score: number) => {

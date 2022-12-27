@@ -36,7 +36,7 @@ const LeaderboardPage = () => {
 
       {!isFetching && (
         <>
-          {" "}
+          {/* TOP 3 */}
           <div className="grid grid-rows-12 lg:grid-flow-col gap-4">
             {modules?.map((module, index) => {
               const ranking = index + 1;
@@ -44,6 +44,7 @@ const LeaderboardPage = () => {
               if (ranking <= 3) {
                 return (
                   <TopRankingCard
+                    key={index}
                     module={module}
                     ranking={ranking}
                     selectedTab={selectedTab}
@@ -52,6 +53,8 @@ const LeaderboardPage = () => {
               }
             })}
           </div>
+
+          {/* REST */}
           <div className="mt-4 grid gap-4">
             {modules?.map((module, index) => {
               const ranking = index + 1;
@@ -59,6 +62,7 @@ const LeaderboardPage = () => {
               if (ranking > 3 && ranking <= maxRows) {
                 return (
                   <LeaderboardRow
+                    key={index}
                     module={module}
                     ranking={ranking}
                     selectedTab={selectedTab}
@@ -67,7 +71,7 @@ const LeaderboardPage = () => {
               }
             })}
           </div>
-          {modules.length > maxRows && (
+          {modules.length > 10 && (
             <div
               onClick={() => {
                 setMaxRows((prevState) => prevState + 10);

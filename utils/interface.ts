@@ -45,4 +45,4 @@ export type TLeaderboardCategory =
   | "top_rated_modules"
   | "top_rated_general_modules";
 
-export type TLeaderboardMetric = "reviews" | "overall score";
+export type TLeaderboardMetric = "reviews" | "score";
