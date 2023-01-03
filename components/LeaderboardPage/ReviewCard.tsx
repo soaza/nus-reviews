@@ -20,13 +20,13 @@ export const ReviewCard = (props: { review: IReviewByUserLeaderboard }) => {
         </div>
 
         <div className="mt-8 text-center">
-          <span className="font-bold">{user_name} on </span>
+          <span className="font-bold">{user_name} </span>
+          on{" "}
           <span className=" text-orange-500">
             <Link href={`/module/${review.review_module_code}`}>
               {review.review_module_code}
             </Link>
           </span>
-
           <div> {review.review_helpful_count} users found it helpful! 😄</div>
         </div>
 

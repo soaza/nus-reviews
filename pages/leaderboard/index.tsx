@@ -41,7 +41,11 @@ const LeaderboardPage = () => {
 
       <FilterBar selectedTab={category} />
 
-      {isFetching && <Spinner />}
+      {isFetching && (
+        <div className="h-screen">
+          <Spinner />
+        </div>
+      )}
 
       {!isFetching && category !== "most_helpful_reviews" && (
         <>
