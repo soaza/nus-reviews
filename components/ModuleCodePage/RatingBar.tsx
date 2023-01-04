@@ -1,8 +1,9 @@
 import React from "react";
-import { capitaliseWord } from "../../utils/common";
+import { capitaliseWord, formatScore } from "../../utils/common";
 
 export const RatingBar = (props: { ratingType: string; rating: number }) => {
   const { ratingType, rating } = props;
+
   return (
     <dl>
       <dt className="text-sm font-medium text-gray-500 ">
@@ -15,7 +16,9 @@ export const RatingBar = (props: { ratingType: string; rating: number }) => {
             style={{ width: `${(rating / 5) * 100}%` }}
           ></div>
         </div>
-        <span className="text-sm font-medium text-gray-500">{rating}</span>
+        <span className="text-sm font-medium text-gray-500">
+          {formatScore(rating)}
+        </span>
       </dd>
     </dl>
   );

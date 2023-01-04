@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import {
-  formatLeaderboardScore,
+  formatScore,
   leaderboardCategoryMetricMapping,
 } from "../../utils/common";
 import {
@@ -59,7 +59,7 @@ export const TopRankingCard = (props: {
         </div>
 
         <div className="text-md text-black">
-          {formatLeaderboardScore(module.review_metric)}{" "}
+          {formatScore(module.review_metric)}{" "}
           {leaderboardCategoryMetricMapping[selectedTab]}
         </div>
 

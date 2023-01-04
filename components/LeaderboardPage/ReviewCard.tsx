@@ -41,7 +41,7 @@ export const ReviewCard = (props: { review: IReviewByUserLeaderboard }) => {
                 <RatingBar
                   key={index}
                   ratingType={ratingType}
-                  rating={review[ratingType]}
+                  rating={Number.parseInt(review[ratingType])}
                 />
               );
             })}

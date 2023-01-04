@@ -85,6 +85,6 @@ export const leaderboardCategoryMetricMapping: {
   most_helpful_reviews: "score",
 };
 
-export const formatLeaderboardScore = (score: number) => {
+export const formatScore = (score: number) => {
   return parseFloat(score.toFixed(1));
 };
