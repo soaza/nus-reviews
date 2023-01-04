@@ -6,11 +6,14 @@ import { OverallRatingScore } from "../common/OverallRatingScore";
 import { RatingBar } from "../ModuleCodePage/RatingBar";
 import parse from "html-react-parser";
 import Link from "next/link";
+import { useState } from "react";
 
 export const ReviewCard = (props: { review: IReviewByUserLeaderboard }) => {
   const { review } = props;
 
   const { user_name, user_avatar } = review;
+
+  const [hideContent, setHideContent] = useState(false);
 
   return (
     <div className="mt-12 mb-4 w-80 lg:w-3/4 self-center">
@@ -30,29 +33,40 @@ export const ReviewCard = (props: { review: IReviewByUserLeaderboard }) => {
           <div> {review.review_helpful_count} users found it helpful! 😄</div>
         </div>
 
-        <div>
-          <div className="flex items-center mb-1">
-            <OverallRatingScore score={review.overall_score} />
-          </div>
-
+        {!hideContent && (
           <div>
-            {ratingTypes.map((ratingType, index) => {
-              return (
-                <RatingBar
-                  key={index}
-                  ratingType={ratingType}
-                  rating={Number.parseInt(review[ratingType])}
-                />
-              );
-            })}
+            <div className="flex items-center mb-1">
+              <OverallRatingScore score={review.overall_score} />
+            </div>
+
+            <div>
+              {ratingTypes.map((ratingType, index) => {
+                return (
+                  <RatingBar
+                    key={index}
+                    ratingType={ratingType}
+                    rating={Number.parseInt(review[ratingType])}
+                  />
+                );
+              })}
+            </div>
+
+            <footer className="mb-5 text-sm text-gray-500 ">
+              <p>Reviewed on {parseDate(review.review_created_at)}</p>
+            </footer>
+
+            <div>{parse(review.review_description as string)}</div>
           </div>
+        )}
 
-          <footer className="mb-5 text-sm text-gray-500 ">
-            <p>Reviewed on {parseDate(review.review_created_at)}</p>
-          </footer>
+        <div
+          onClick={() => {
+            setHideContent((prevState) => !prevState);
+          }}
+          className="cursor-pointer text-center text-gray-400 hover:text-gray-600 mt-4"
+        >
+          Click to {hideContent ? "show" : "hide"} content
         </div>
-
-        {parse(review.review_description as string)}
       </div>
 
       <Divider />
