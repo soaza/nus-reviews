@@ -17,7 +17,7 @@ export const RatingBar = (props: { ratingType: string; rating: number }) => {
           ></div>
         </div>
         <span className="text-sm font-medium text-gray-500">
-          {formatScore(rating)}
+          {rating && formatScore(rating)}
         </span>
       </dd>
     </dl>
