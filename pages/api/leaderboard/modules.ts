@@ -34,13 +34,13 @@ export default async function handler(
         ORDER BY AVG(overall_score) DESC`;
         break;
 
-      case "top_rated_general_modules":
+      case "most_reviewed_general_modules":
         result = await prisma.$queryRaw`
-          SELECT review_module_code as module_code,AVG(overall_score) as review_metric
+          SELECT review_module_code as module_code,COUNT(*) as review_metric
           FROM "Reviews"
           GROUP BY review_module_code 
           HAVING review_module_code LIKE 'GE%'
-          ORDER BY AVG(overall_score) DESC`;
+          ORDER BY COUNT(*) DESC`;
         break;
 
       case "top_rated_cs_modules":

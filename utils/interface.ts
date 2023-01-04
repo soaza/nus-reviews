@@ -48,7 +48,7 @@ export interface ILeaderboardModule {
 export type TLeaderboardCategory =
   | "most_reviewed"
   | "top_rated_modules"
-  | "top_rated_general_modules"
+  | "most_reviewed_general_modules"
   | "top_rated_cs_modules"
   | "most_helpful_reviews";
 

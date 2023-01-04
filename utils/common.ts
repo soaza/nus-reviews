@@ -80,7 +80,7 @@ export const leaderboardCategoryMetricMapping: {
 } = {
   most_reviewed: "reviews",
   top_rated_modules: "score",
-  top_rated_general_modules: "score",
+  most_reviewed_general_modules: "reviews",
   top_rated_cs_modules: "score",
   most_helpful_reviews: "score",
 };

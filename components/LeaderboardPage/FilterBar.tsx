@@ -16,8 +16,8 @@ export const FilterBar = (props: { selectedTab }) => {
       moreThanFiveReviews: true,
     },
     {
-      name: "top_rated_general_modules",
-      label: "📚 Top Rated General Modules",
+      name: "most_reviewed_general_modules",
+      label: "📚 Most Reviewed General Modules",
       moreThanFiveReviews: false,
     },
     {
